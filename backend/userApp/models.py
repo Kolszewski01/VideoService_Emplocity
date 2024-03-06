@@ -18,7 +18,7 @@ class MyUserManager(BaseUserManager):
         )
 
         user.set_password(password)
-        user.activation_token = self.generate_activation_token(email)  # Dodajemy generowanie tokenu aktywacyjnego
+        user.activation_token = self.generate_activation_token(email)
         user.save(using=self._db)
         return user
 
