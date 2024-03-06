@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Strona główna{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Dodatkowe style CSS -->
+    <style>
+        body {
+            padding-top: 20px;
+        }
+        .user-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #777;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'home' %}">ZBOMBYNaEkran</a>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <form action="{% url 'logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit">Wyloguj</button>
+                            </form>
+
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Zaloguj / Zarejestruj</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        {% block content %}
+        <!-- Tutaj wstaw zawartość strony -->
+        <h2>Popularne teraz</h2>
+        <div class="d-flex flex-wrap">
+            <!-- Przykładowe ikony użytkowników -->
+            <div class="user-icon">User837</div>
+            <div class="user-icon">MAriusz1</div>
+            <!-- Dodaj więcej ikon użytkowników -->
+        </div>
+        {% endblock %}
+    </div>
+
+    <!-- Opcjonalny JavaScript -->
+    <!-- jQuery pierwszy, potem Popper.js, potem Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy4Ck4SOF4y4Ck4C2DgHfViXydVeLm+JDM" crossorigin="anonymous"></script>
+</body>
+</html>
