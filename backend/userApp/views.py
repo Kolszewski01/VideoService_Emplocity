@@ -21,7 +21,7 @@ def register(request):
         form = MyUserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False  # Nie aktywuj konta od razu
+            user.is_active = False
             user.save()
             current_site = get_current_site(request)
             mail_subject = 'Aktywuj swoje konto.'
@@ -51,7 +51,7 @@ def activate_account(request, uidb64, token):
 
         return redirect('login')
     else:
-        return render(request, 'activation_invalid.html')  # Widok dla nieudanej aktywacji
+        return render(request, 'activation_invalid.html')
 
 class LogoutView(DefaultLogoutView):
     next_page = reverse_lazy('main')

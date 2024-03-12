@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,43 +7,29 @@
     <title>{% block title %}Strona główna{% endblock %}</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
-    <style>
-        body {
-            padding-top: 20px;
-        }
-        .user-icon {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background-color: #777;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            margin: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'main.css'%}">
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="{% url 'home' %}">NaEkran</a>
-            <div class="navbar-collapse collapse">
-                <ul class="navbar-nav ml-auto">
-                    {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Wyloguj</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Zaloguj / Zarejestruj</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
+    <nav class="nav-bar">
+        <div class="logo-container">
+             <a class="logo" href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
+        </div>
+        <div class="search-bar">
+            <input type="search" label="wyszukaj">
+        </div>
+        <div class="login">
+                {% if user.is_authenticated %}
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Wyloguj</button>
+                        </form>
+                {% else %}
+
+             <a href="{% url 'login' %}">Zaloguj / Zarejestruj</a>
+        </div>
+                {% endif %}
+
+    </nav>
         {% block content %}
 
         <h2>Popularne teraz</h2>
@@ -53,7 +40,6 @@
 
         </div>
         {% endblock %}
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

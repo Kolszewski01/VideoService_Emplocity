@@ -1,0 +1,115 @@
+body {
+    background-color: #9A9999;
+    color: #FFFFFF;
+}
+.user-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #777;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    margin: 10px;
+}
+.logo-container img{
+    width: 50%;
+    height: 20%;
+    padding: 3%;
+    margin-left: 3%;
+}
+.logo-container a{
+    margin-right: 3%;
+}
+.nav-bar{
+    background-color: #252423;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+.logo-container{
+    width: 20%;
+}
+.login{
+    width: 20%;
+    display: flex;
+    justify-content: right;
+    margin-right: 3%;
+}
+.search-bar{
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-form{
+    color: black;
+    background-color: #55BAE7;
+    margin-top:10%;
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    width: 100%;
+    border: 1px solid #55BAE7;
+    border-radius: 20px;
+}
+.submit-button{
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    width: 80%;
+    justify-content: center;
+    background-color: #E63453;
+    border: 1px solid #E63453;
+    border-radius: 20px;
+}
+.submit-button:hover{
+    background-color: #ee6779;
+}
+.login-form form {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.login-form p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.login-form label {
+    margin-bottom: 5px;
+}
+
+.login-form input {
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.mt-1 a{
+    text-decoration: none;
+    color: #000;
+}
+.mt-1 a:hover{
+    color: #252423;
+}
+.mt-3 a:hover{
+    color: #252423;
+}
+.mt-3 a{
+    text-decoration: none;
+    color: #000;
+}
