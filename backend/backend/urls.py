@@ -23,5 +23,6 @@ urlpatterns = [
     path('frameApp/', include('frameApp.urls')),
     path('userApp/', include('userApp.urls')),
     path('', main_views.home, name='main'),
+    path('', include('video.urls'))
 
 ]

@@ -7,6 +7,7 @@ services:
     command: python /backend/manage.py runserver 0.0.0.0:8000
     volumes:
       - ./backend:/backend
+      -  videos:/projekt/VideoService_Emplocity/videos
     ports:
       - 8000:8000
     environment:
@@ -26,3 +27,6 @@ services:
 
     stdin_open: true
     tty: true
+volumes:
+  videos:
+    external: true

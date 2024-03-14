@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'userApp',
     'rest_framework',
     'rest_framework.authtoken',
+    'video',
 ]
 
 MIDDLEWARE = [
@@ -146,7 +147,7 @@ REST_FRAMEWORK = {
 
 # AUTH_USER_MODEL = 'userApp.MyUser'
 
-load_dotenv()
+# load_dotenv()
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -155,5 +156,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'popocompany53@gmail.com'
 EMAIL_HOST_PASSWORD = 'pgfo tkpk wfpw bluv'
 
-
+MEDIA_ROOT = '/var/lib/docker/volumes/videos/_data'
+MEDIA_URL = '/media/'
 
