@@ -17,7 +17,7 @@ body {
 .logo-container img{
     width: 50%;
     height: 20%;
-    padding: 3%;
+    padding: 5%;
     margin-left: 3%;
 }
 .logo-container a{
@@ -39,12 +39,72 @@ body {
     justify-content: right;
     margin-right: 3%;
 }
-.search-bar{
-    width: 60%;
+.search-container{
+    width: 40%;
     display: flex;
     align-items: center;
     justify-content: center;
+    outline: none;
 }
+#search {
+    height: 34px;
+    width: 50%;
+    border: none;
+    border-radius: 25px;
+    outline: none;
+    background-repeat: no-repeat;
+    background-position: 95% center;
+    padding-left: 2%;
+}
+
+input[type="search"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+.search-button {
+    width: 32px;
+    height: 32px;
+    background-color: #55b9e6;
+    background-image: url('./images/loupe.png');
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 20px;
+    margin-left: -33px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:focus {
+    background-color: #e53453;
+}
+.login-button {
+    display: inherit;
+    padding: 5px 12px 5px 5px;
+    background-color: #55b9e6;
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #e53453;
+    text-decoration: none;
+    color: #fdfdfd;
+}
+.account-button {
+    width: 40px;
+    height: 40px;
+    background-image: url('./images/avatar.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 .container{
     display: flex;
     justify-content: center;
