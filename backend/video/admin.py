@@ -1,4 +1,7 @@
 from django.contrib import admin
 from .models import Video
-# Register your models here.
-admin.site.register(Video)
+
+@admin.register(Video)
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ('id','title','description','slug','author','uploaded_at')
+    prepopulated_fields = {'slug': ('title',)}

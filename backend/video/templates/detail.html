@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}{{video.title}}{% endblock %}
+
+{% block content %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('shareLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            var videoId = '{{ video.id }}';
+            var videoUrl = window.location.origin + '/videos/' + videoId + '/';
+            navigator.clipboard.writeText(videoUrl).then(function() {
+                alert('Link to this video has been copied to clipboard.');
+            }, function(err) {
+                console.error('Failed to copy link: ', err);
+            });
+        });
+    });
+</script>
+    <h1>{{video.title}}</h1>
+    <video width="320" height="240" controls>
+        <source src="{{ video.video_file.url }}" type="video/mp4">
+        Twoja przeglądarka nie wspiera znaczników video
+    </video>
+
+    <p class="date">
+        Opublikwoany {{ video.uploaded_at }} przez {{ video.author }} Wyświetlenia: {{ video.views }}
+    </p>
+    <p class="description">
+        {{video.description}}
+    </p>
+    <a href="#" id="shareLink">Udostępnij video</a>
+{% endblock %}
