@@ -1,15 +1,31 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import MyUser
 
-class MyUserAdmin(admin.ModelAdmin):
+
+class CustomUserAdmin(UserAdmin):
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
     model = MyUser
-    list_display = ['email', 'username', 'is_active', 'registration_date']
-    list_filter = ['is_active']
+    list_display = ("email", "is_staff", "is_active",)
+    list_filter = ("email", "is_staff", "is_active",)
     fieldsets = (
-        (None, {'fields': ('email', 'username', 'password', 'registration_date', 'is_active', 'id_frame', 'activation_token')}),
+        (None, {"fields": ("email", "password")}),
+        ("Permissions", {"fields": ("is_staff", "is_active", "groups", "user_permissions")}),
     )
     add_fieldsets = (
-        (None, {'fields': ('email', 'username', 'password', 'is_active', 'id_frame', 'activation_token')}),
+        (None, {
+            "classes": ("wide",),
+            "fields": (
+                "email", "password1", "password2", "is_staff",
+                "is_active", "groups", "user_permissions"
+            )}
+        ),
     )
+    search_fields = ("email",)
+    ordering = ("email",)
 
-admin.site.register(MyUser, MyUserAdmin)
+
+admin.site.register(MyUser, CustomUserAdmin)

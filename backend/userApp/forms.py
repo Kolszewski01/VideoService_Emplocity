@@ -1,6 +1,10 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+
+from .models import MyUser
+
 
 User = get_user_model()
 
@@ -17,3 +21,19 @@ class MyUserRegistrationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
+
+
+class CustomUserCreationForm(UserCreationForm):
+
+    class Meta:
+        model = MyUser
+        fields = ("email",)
+
+
+class CustomUserChangeForm(UserChangeForm):
+
+    class Meta:
+        model = MyUser
+        fields = ("email",)
