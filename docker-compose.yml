@@ -4,9 +4,9 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    command: python /app/manage.py runserver 0.0.0.0:8000
+    command: python /backend/manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./backend:/app
+      - ./backend:/backend
       - videos:/vol/web/media
     ports:
       - 8000:8000
