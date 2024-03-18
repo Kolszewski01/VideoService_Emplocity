@@ -1,4 +1,4 @@
-Django==4.2.11
+Django==5.0.2
 djangorestframework
 django-storages
 Pillow
