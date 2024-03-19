@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-# from decouple import config
 import os
 from dotenv import load_dotenv
 
@@ -93,7 +92,7 @@ DATABASES = {
         'NAME': os.environ.get('DB_NAME', 'app'),
         'USER': os.environ.get('DB_USER', 'postgres'),
         'PASSWORD': os.environ.get('DB_PASSWORD', 'pass'),
-        'HOST': os.environ.get('DB_HOST', 'db'),  # Nazwa usługi db w docker-compose.yml
+        'HOST': os.environ.get('DB_HOST', 'db'),
         'PORT': '5432',
     }
 }
@@ -154,14 +153,14 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = 'userApp.MyUser'
 
-# load_dotenv()
+load_dotenv()
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'popocompany53@gmail.com'
-EMAIL_HOST_PASSWORD = 'pgfo tkpk wfpw bluv'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 MEDIA_ROOT = '/var/lib/docker/volumes/videos/_data'
 MEDIA_URL = '/media/'

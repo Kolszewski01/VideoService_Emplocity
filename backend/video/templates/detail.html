@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}{{video.title}}{% endblock %}
+{% block title %}{{ video.title }}{% endblock %}
 
 {% block content %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        var videoId = '{{ video.url_path }}';
+
         document.getElementById('shareLink').addEventListener('click', function(event) {
             event.preventDefault();
-            var videoId = '{{ video.url_path }}';
             var videoUrl = window.location.origin + '/videos/' + videoId + '/';
             navigator.clipboard.writeText(videoUrl).then(function() {
                 alert('Link to this video has been copied to clipboard.');
@@ -15,27 +16,49 @@
                 console.error('Failed to copy link: ', err);
             });
         });
+
+        var video = document.getElementById('videoElement');
+        var hasBeenCounted = false;
+
+        video.addEventListener('timeupdate', function() {
+            var threshold = video.duration * 0.25;
+
+            if (!hasBeenCounted && video.currentTime >= threshold) {
+                hasBeenCounted = true;
+
+                fetch(`/update_views/${videoId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => console.log(data.message))
+                .catch(error => console.error('Error:', error));
+            }
+        });
     });
 </script>
-    <h1>{{video.title}}</h1>
-    <video width="320" height="240" controls>
-        <source src="{{ video.video_file.url }}" type="video/mp4">
-        Twoja przeglądarka nie wspiera znaczników video
-    </video>
+<h1>{{ video.title }}</h1>
+<video id="videoElement" width="320" height="240" controls>
+    <source src="{{ video.video_file.url }}" type="video/mp4">
+    Your browser does not support video tags.
+</video>
 
-    <p class="date">
-        Opublikwoany {{ video.uploaded_at }} przez {{ video.author }} Wyświetlenia: {{ video.views }}
-    </p>
-    <p class="description">
-        {{video.description}}
-    </p>
-    <a href="#" id="shareLink">Udostępnij video</a>
-        <h2>Podobne posty</h2>
-    {% for video in similar_videos %}
-    <p>
-        <a href="{{ video.get_absolute_url }}">{{video.title}}</a>
-    </p>
-    {% empty %}
-    Nie ma jeszcze podobnych postów
-    {% endfor %}
+<p class="date">
+    Published {{ video.uploaded_at }} by {{ video.author }} Views: {{ video.views }}
+</p>
+<p class="description">
+    {{ video.description }}
+</p>
+<a href="#" id="shareLink">Share video</a>
+<h2>Similar posts</h2>
+{% for similar_video in similar_videos %}
+<p>
+    <a href="{{ similar_video.get_absolute_url }}">{{ similar_video.title }}</a>
+</p>
+{% empty %}
+No similar posts yet
+{% endfor %}
 {% endblock %}
