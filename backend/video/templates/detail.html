@@ -7,7 +7,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('shareLink').addEventListener('click', function(event) {
             event.preventDefault();
-            var videoId = '{{ video.id }}';
+            var videoId = '{{ video.url_path }}';
             var videoUrl = window.location.origin + '/videos/' + videoId + '/';
             navigator.clipboard.writeText(videoUrl).then(function() {
                 alert('Link to this video has been copied to clipboard.');
@@ -30,4 +30,12 @@
         {{video.description}}
     </p>
     <a href="#" id="shareLink">Udostępnij video</a>
+        <h2>Podobne posty</h2>
+    {% for video in similar_videos %}
+    <p>
+        <a href="{{ video.get_absolute_url }}">{{video.title}}</a>
+    </p>
+    {% empty %}
+    Nie ma jeszcze podobnych postów
+    {% endfor %}
 {% endblock %}

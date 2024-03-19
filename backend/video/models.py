@@ -2,6 +2,9 @@ from django.db import models
 import uuid
 from django.urls import reverse
 from django.conf import settings
+from taggit.managers import TaggableManager
+
+
 
 
 class Video(models.Model):
@@ -9,7 +12,7 @@ class Video(models.Model):
         PUBLIC = 'PB', 'Public'
         PRIVATE = 'PR', 'Private'
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    url_path = models.UUIDField(default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=250, unique_for_date='uploaded_at')
     video_file = models.FileField(upload_to='videos/')
@@ -24,6 +27,8 @@ class Video(models.Model):
     type = models.CharField(max_length=2, choices=Type.choices, default=Type.PUBLIC)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     views = models.IntegerField(default=0)
+    tags = TaggableManager()
+    objects = models.Manager()
 
     def __str__(self):
         return self.title
