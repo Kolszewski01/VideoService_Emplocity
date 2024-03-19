@@ -3,19 +3,28 @@
 {% block title %}Wszystkie Video{% endblock %}
 
 {% block content %}
-    {% for video in videos %}
-    <h2>
-        <a href="{{ video.get_absolute_url }}">
-            {{ video.title }}
-        </a>
-    </h2>
-    <video width="320" height="240" controls>
-        <source src="{{ video.video_file.url }}" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <p class="date">
-        Opublikwoany {{ video.uploaded_at }} przez {{ video.author }}
-    </p>
-    {% endfor %}
+    <div class="videos">
+        {% for video in videos %}
+        <div class="video-container">
+<!--                1. zmienić avatar dla uzytkownmikow, 2.zmienic email -> username,-->
+                <div class="user-info">
+                    <img src="../../static/images/avatar.png" class="avatar_user_videos">
+                    <p class="author">{{ video.author.username }}</p>
+                </div>
+                <video width="720" height="480" controls>
+                    <source src="{{ video.video_file.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <h2>
+                    <a href="{{ video.get_absolute_url }}" class="title-video">
+                        {{ video.title }}
+                    </a>
+                </h2>
+    <!--            <p class="date">-->
+    <!--                Opublikwoany {{ video.uploaded_at }} przez {{ video.author }}-->
+    <!--            </p>-->
+        </div>
+        {% endfor %}
+    </div>
     {% include "pagination.html" with page=videos %}
 {% endblock %}
