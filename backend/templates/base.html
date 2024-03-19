@@ -14,15 +14,12 @@
         <div class="logo-container">
              <a class="logo" href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
         </div>
-<<<<<<< Updated upstream
+
         <div class="search-container">
             <input id="search" type="search" label="search-bar" placeholder="Szukaj">
             <button type="submit" class="search-button"></button>
-=======
-        <div class="search-bar">
-            <input type="search" label="wyszukaj" name="search_query">
->>>>>>> Stashed changes
         </div>
+
         <div class="login">
                 {% if user.is_authenticated %}
                         <form action="{% url 'logout' %}" method="post">
