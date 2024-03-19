@@ -13,7 +13,6 @@ Witaj w **ZBombyNaEkrany** - Twojej nowej ulubionej platformie do dzielenia się
 
 Projekt **ZBombyNaEkrany** wykorzystuje nowoczesny stos technologiczny, aby zapewnić najlepsze możliwe doświadczenie użytkownika:
 
-- **Frontend**: React.js dla dynamicznych i responsywnych widoków.
 - **Backend**: Django REST Framework dla solidnej i skalowalnej warstwy API.
 - **Baza danych**: PostgreSQL dla niezawodnego przechowywania danych.
 
