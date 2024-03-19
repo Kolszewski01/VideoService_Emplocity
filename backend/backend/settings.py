@@ -41,10 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'frameApp',
-    'userApp',
     'rest_framework',
     'rest_framework.authtoken',
     'video',
+    'userApp',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -88,10 +89,16 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'app'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'pass'),
+        'HOST': os.environ.get('DB_HOST', 'db'),  # Nazwa usługi db w docker-compose.yml
+        'PORT': '5432',
     }
 }
+
+
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -145,7 +152,7 @@ REST_FRAMEWORK = {
     ),
 }
 
-# AUTH_USER_MODEL = 'userApp.MyUser'
+AUTH_USER_MODEL = 'userApp.MyUser'
 
 # load_dotenv()
 
