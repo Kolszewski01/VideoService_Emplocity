@@ -1,9 +1,12 @@
 import uuid
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Video
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse, Http404
 from django.db.models import Count
+from .forms import VideoForm
+from django.utils.text import slugify
+from django.utils import timezone
 
 def all_videos(request):
     video_list = Video.objects.all()
@@ -39,12 +42,36 @@ def video_detail(request, year=None, month=None, day=None, video=None, video_id=
                                            'similar_videos': similar_videos})
 
 
-def share_video(request, video_id):
-    try:
-        uuid.UUID(video_id)
-        video = get_object_or_404(Video, id=video_id)
-    except ValueError:
-        return HttpResponse("Nieprawidłowy format UUID", status=400)
+def upload_video(request):
+    if request.method == 'POST':
+        form = VideoForm(request.POST, request.FILES)
+        if form.is_valid():
+            video = form.save(commit=False)
+            video.uploaded_at = timezone.now()
+            video.slug = slugify(video.title)
+            if request.user.is_authenticated:
+                video.author = request.user
 
-    video_url = request.build_absolute_uri(video.get_absolute_url())
-    return HttpResponse(video_url)
+            video.save()
+
+            tags_data = form.cleaned_data['tags']
+
+            if isinstance(tags_data, str):
+                tags_list = [tag.strip() for tag in tags_data.split(',')]
+            elif isinstance(tags_data, list):
+                tags_list = tags_data
+            else:
+                tags_list = []
+
+            tags_list = [tag for tag in tags_list if tag]
+
+            video.tags.set(tags_list)
+
+            return redirect('home')
+    else:
+        form = VideoForm()
+    return render(request, 'upload_video.html', {'form': form})
+
+
+
+

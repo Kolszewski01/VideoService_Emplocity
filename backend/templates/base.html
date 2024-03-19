@@ -15,7 +15,7 @@
              <a class="logo" href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
         </div>
         <div class="search-bar">
-            <input type="search" label="wyszukaj">
+            <input type="search" label="wyszukaj" name="search_query">
         </div>
         <div class="login">
                 {% if user.is_authenticated %}
@@ -35,10 +35,27 @@
         <h2>Popularne teraz</h2>
         <div class="d-flex flex-wrap">
 
+
             <div class="user-icon">User837</div>
             <div class="user-icon">MAriusz1</div>
 
         </div>
+{% if query %}
+    <div>
+        <div>
+        <!-- loop through search query -->
+        {% for video in videos %}
+            <div>
+                <!-- return search query -->
+                <p>{{video.title}}</p>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <!-- return a message if the user does not enter a search query -->
+    <h1>Please enter a search query</h1>
+{% endif %}
         {% endblock %}
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
