@@ -173,3 +173,51 @@ input[type="search"]:focus {
     text-decoration: none;
     color: #000;
 }
+.videos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*margin-bottom: 50px;*/
+}
+.video-container {
+    background-color: #857f7f;
+    padding: .5em;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1px;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #6b6969;
+    border-radius: 5px;
+    box-shadow: 3px 3px 4px 2px #34728d;
+}
+
+.avatar_user_videos {
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.author {
+    margin-left: .1em;
+    margin-top: 20px;
+    font-size: 1.7em;
+    font-weight: bold;
+
+}
+
+.video-container {
+    background-color: #807e7b;
+    padding: 10px;
+}
+.title-video{
+    text-shadow: 2px 1px 4px black;
+    text-decoration: none;
+    color: #fdfdfd;
+}
+.title-video:hover{
+    text-decoration: none;
+    color: #fdfdfd;
+}
