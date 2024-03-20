@@ -3,12 +3,16 @@
 {% block title %}Upload Video{% endblock %}
 
 {% block content %}
+<div class="container">
+    <div class="login-form">
+        <h2>Dodaj film</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class = "submit-button " type="submit">Zapisz</button>
+        </form>
+    </div>
+</div>
 
-    <h2>Upload Video</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Zapisz</button>
-    </form>
 
 {% endblock %}
