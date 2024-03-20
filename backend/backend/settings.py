@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'video',
     'userApp',
     'taggit',
+    'like_dislikeApp',
 ]
 
 MIDDLEWARE = [

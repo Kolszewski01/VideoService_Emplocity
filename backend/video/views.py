@@ -12,7 +12,10 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 
 def all_videos(request):
-    video_list = Video.objects.all()
+    video_list = Video.objects.all().order_by('-uploaded_at')
+    for video in video_list:
+        video.num_likes = video.likes.filter(like=True).count()
+        video.num_dislikes = video.likes.filter(like=False).count()
     paginator = Paginator(video_list, 10)
     page_number = request.GET.get('page', 1)
     try:
@@ -22,6 +25,7 @@ def all_videos(request):
     except EmptyPage:
         videos = paginator.page(paginator.num_pages)
     return render(request, 'all_videos.html', {'videos': videos})
+
 
 def video_detail(request, year=None, month=None, day=None, video=None, video_id=None):
     if video_id:

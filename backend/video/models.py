@@ -30,6 +30,12 @@ class Video(models.Model):
     tags = TaggableManager()
     objects = models.Manager()
 
+    def num_likes(self):
+        return self.likes.filter(like=True).count()
+
+    def num_dislikes(self):
+        return self.likes.filter(like=False).count()
+
     def __str__(self):
         return self.title
 
