@@ -221,3 +221,92 @@ input[type="search"]:focus {
     text-decoration: none;
     color: #fdfdfd;
 }
+.film-container{
+    padding: 10px;
+    margin-left: 20px;
+    float: left;
+}
+.content-detail{
+    margin-left: 3em;
+    width: 66em;
+    background-color: #55BAE7;
+    position: relative;
+}
+.similar-videos{
+    clear: both;
+    float: left;
+    background-color: #e53453;
+    width: 20em;
+}
+
+.video-detail {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.title-video-detail{
+    margin-left: 10px;
+    font-size: 30px;
+}
+
+.user-info-detail {
+    display: flex;
+    padding: 10px;
+    background-color: #0a3d52;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 0px -4px 1px #3a8aae;
+}
+
+.avatar_user_detail {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+}
+
+.user-name-detail {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.user-name-detail-right {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.share{
+    margin: 5px;
+}
+.report{
+    margin-right: 50px;
+}
+.like{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 25px;
+}
+.dislike{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 25px;
+}
+.views{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 5px;
+}
+.description{
+    border-radius: 20px;
+    margin-top: 5px;
+    background-color: #418eb0;
+    padding: 10px;
+    font-size: 16px;
+    text-autospace: punctuation;
+    text-align: justify;
+}
