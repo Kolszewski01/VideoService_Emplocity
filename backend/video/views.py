@@ -71,12 +71,6 @@ def upload_video(request):
     else:
         form = VideoForm()
     return render(request, 'upload_video.html', {'form': form})
-
-
-
-
-<<<<<<< Updated upstream
-=======
     video_url = request.build_absolute_uri(video.get_absolute_url())
     return HttpResponse(video_url)
 
@@ -91,4 +85,3 @@ def search_feature(request):
         return render(request, 'templates/base.html', {'query':search_query, 'posts':posts})
     else:
         return render(request, 'templates/base.html',{})
->>>>>>> Stashed changes
