@@ -22,6 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('frameApp/', include('frameApp.urls')),
     path('userApp/', include('userApp.urls')),
+    path('video/', include('video.urls')),
+    path('like_dislike/', include('like_dislikeApp.urls')),
     path('', main_views.home, name='main'),
     path('', include('video.urls'))
 

@@ -3,28 +3,63 @@
 {% block title %}Wszystkie Video{% endblock %}
 
 {% block content %}
-    <div class="videos">
-        {% for video in videos %}
-        <div class="video-container">
-<!--                1. zmienić avatar dla uzytkownmikow, 2.zmienic email -> username,-->
-                <div class="user-info">
-                    <img src="../../static/images/avatar.png" class="avatar_user_videos">
-                    <p class="author">{{ video.author.username }}</p>
-                </div>
-                <video width="720" height="480" controls>
-                    <source src="{{ video.video_file.url }}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <h2>
-                    <a href="{{ video.get_absolute_url }}" class="title-video">
-                        {{ video.title }}
-                    </a>
-                </h2>
-    <!--            <p class="date">-->
-    <!--                Opublikwoany {{ video.uploaded_at }} przez {{ video.author }}-->
-    <!--            </p>-->
+<div class="videos">
+    {% for video in videos %}
+    <div class="video-container">
+        <div class="user-info">
+            <img src="../../static/images/avatar.png" class="avatar_user_videos">
+            <p class="author">{{ video.author.username }}</p>
         </div>
-        {% endfor %}
+        <video width="720" height="480" controls>
+            <source src="{{ video.video_file.url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h2>
+            <a href="{{ video.get_absolute_url }}" class="title-video">{{ video.title }}</a>
+        </h2>
+        <div class="like-dislike-buttons">
+            <button type="button" class="like-button" data-video-id="{{ video.url_path }}" data-like="true">Like</button>
+            <span id="likes-count-{{ video.url_path }}">{{ video.num_likes }}</span>
+            <button type="button" class="dislike-button" data-video-id="{{ video.url_path }}" data-like="false">Dislike</button>
+            <span id="dislikes-count-{{ video.url_path }}">{{ video.num_dislikes }}</span>
+        </div>
     </div>
-    {% include "pagination.html" with page=videos %}
+    {% endfor %}
+</div>
+{% include "pagination.html" with page=videos %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.like-button, .dislike-button').forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+            const videoId = this.dataset.videoId;
+            const like = this.dataset.like === 'true';
+            sendLikeDislikeRequest(videoId, like);
+        });
+    });
+
+    function sendLikeDislikeRequest(videoId, like) {
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        fetch(`/like_dislike/video/${videoId}/${like ? 'like' : 'dislike'}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrfToken,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 'like': like }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.querySelector(`#likes-count-${videoId}`).innerText = data.num_likes;
+            document.querySelector(`#dislikes-count-${videoId}`).innerText = data.num_dislikes;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+});
+</script>
 {% endblock %}
