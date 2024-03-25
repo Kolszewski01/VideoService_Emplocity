@@ -1,8 +1,9 @@
 import uuid
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.decorators.http import require_POST
 from .models import Video
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from django.db.models import Count
 from .forms import VideoForm
 from django.utils.text import slugify
@@ -32,19 +33,13 @@ def video_detail(request, year=None, month=None, day=None, video=None, video_id=
         except ValueError:
             raise Http404("Nieprawidłowy format UUID")
     else:
-        video = get_object_or_404(Video, slug=video, uploaded_at__year=year, uploaded_at__month=month,
-                                  uploaded_at__day=day)
-
-    video.views += 1
-    video.save(update_fields=['views'])
+        video = get_object_or_404(Video, slug=video, uploaded_at__year=year, uploaded_at__month=month, uploaded_at__day=day)
 
     video_tags_ids = video.tags.values_list('id', flat=True)
     similar_videos = Video.objects.filter(tags__id__in=video_tags_ids).exclude(id=video.id)
     similar_videos = similar_videos.annotate(same_tags=Count('tags')).order_by('-same_tags')[:4]
 
-    return render(request, 'detail.html', {'video': video,
-                                           'similar_videos': similar_videos})
-
+    return render(request, 'detail.html', {'video': video, 'similar_videos': similar_videos})
 
 def upload_video(request):
     if request.method == 'POST':
@@ -89,3 +84,15 @@ def search_feature(request):
         return render(request, 'templates/base.html', {'query':search_query, 'posts':posts})
     else:
         return render(request, 'templates/base.html',{})
+
+
+@require_POST
+# @csrf_exempt
+def update_video_views(request, video_id):
+    try:
+        video = get_object_or_404(Video, url_path=video_id)
+        video.views += 1
+        video.save(update_fields=['views'])
+        return JsonResponse({'status': 'success', 'message': 'Video view count updated.', 'views': video.views})
+    except Video.DoesNotExist:
+        return JsonResponse({'status': 'error', 'message': 'Video not found.'}, status=404)

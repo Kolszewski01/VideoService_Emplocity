@@ -17,12 +17,7 @@
         <h2>
             <a href="{{ video.get_absolute_url }}" class="title-video">{{ video.title }}</a>
         </h2>
-        <div class="like-dislike-buttons">
-            <button type="button" class="like-button" data-video-id="{{ video.url_path }}" data-like="true">Like</button>
-            <span id="likes-count-{{ video.url_path }}">{{ video.num_likes }}</span>
-            <button type="button" class="dislike-button" data-video-id="{{ video.url_path }}" data-like="false">Dislike</button>
-            <span id="dislikes-count-{{ video.url_path }}">{{ video.num_dislikes }}</span>
-        </div>
+
     </div>
     {% endfor %}
 </div>
