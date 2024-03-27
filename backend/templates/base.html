@@ -14,15 +14,23 @@
         <div class="logo-container">
              <a class="logo" href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
         </div>
-        <div class="search-container">
-            <input id="search" type="search" label="search-bar" placeholder="Szukaj">
-            <button type="submit" class="search-button"></button>
-        </div>
+        <form class="d-flex" role="search" method="POST">
+            {% csrf_token %}
+            <input
+                    class="form-control me-2"
+                    type="search"
+                    label="search-bar"
+                    placeholder="Szukaj"
+                    name="search_query"
+                    required aria-label="Search"
+            >
+            <button class="search-button" type="submit"></button>
+        </form>
         <div class="login">
                 {% if user.is_authenticated %}
                         <form action="{% url 'logout' %}" method="post">
                             {% csrf_token %}
-                            <button type="submit" class="account-button"></button>
+                            <button type="submit" class="btt account-button"></button>
                         </form>
                 {% else %}
 
