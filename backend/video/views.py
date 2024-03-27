@@ -9,6 +9,7 @@ from .forms import VideoForm
 from django.utils.text import slugify
 from django.utils import timezone
 
+
 def all_videos(request):
     video_list = Video.objects.all().order_by('-uploaded_at')
     for video in video_list:
@@ -96,3 +97,4 @@ def update_video_views(request, video_id):
         return JsonResponse({'status': 'success', 'message': 'Video view count updated.', 'views': video.views})
     except Video.DoesNotExist:
         return JsonResponse({'status': 'error', 'message': 'Video not found.'}, status=404)
+

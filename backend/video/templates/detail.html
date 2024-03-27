@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}{{ video.title }}{% endblock %}
 
@@ -76,84 +77,114 @@
 });
 </script>
 
-<div class="content-detail">
-    <video class="video-detail" width="1024" height="576" controls>
-        <source src="{{ video.video_file.url }}" type="video/mp4">
-        Twoja przeglądarka nie wspiera znaczników video
-    </video>
-    <p class="title-video-detail">
-        {{ video.title }}
-    </p>
+<div class="main-detail">
+    <div class="content-detail">
+        <video class="video-detail" width="100%"  controls>
+            <source src="{{ video.video_file.url }}" type="video/mp4">
+            Twoja przeglądarka nie wspiera znaczników video
+        </video>
+        <p class="title-video-detail">
+            {{ video.title }}
+        </p>
 
-    <div class="user-info-detail">
-        <img src="../../static/images/avatar.png" class="avatar_user_detail">
-        <p class="user-name-detail">{{ video.author.username }}</p>
+        <div class="user-info-detail">
+            <img src="{% static 'images/avatar.png' %}" class="avatar_user_detail">
+            <p class="user-name-detail">{{ video.author.username }}</p>
 
-        <div class="user-name-detail-right">
-            <div class="share">
-                <a href="#" id="shareLink">
-                    <svg class="w-6 h-6 txt-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/>
-                    </svg>
-                </a>
+            <div class="user-name-detail-right">
+                <div class="share">
+                    <a href="#" id="shareLink">
+                        <svg class="w-6 h-6 txt-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
-            <!-- Other user info -->
-        </div>
-    </div>
-                <div class="report">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M18.458 3.11A1 1 0 0 1 19 4v16a1 1 0 0 1-1.581.814L12 16.944V7.056l5.419-3.87a1 1 0 0 1 1.039-.076ZM22 12c0 1.48-.804 2.773-2 3.465v-6.93c1.196.692 2 1.984 2 3.465ZM10 8H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6V8Zm0 9H5v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3Z" clip-rule="evenodd"/>
-                    </svg>
-                </div>
 
-                <div class="like">
+            <div class="report">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M18.458 3.11A1 1 0 0 1 19 4v16a1 1 0 0 1-1.581.814L12 16.944V7.056l5.419-3.87a1 1 0 0 1 1.039-.076ZM22 12c0 1.48-.804 2.773-2 3.465v-6.93c1.196.692 2 1.984 2 3.465ZM10 8H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6V8Zm0 9H5v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3Z" clip-rule="evenodd"/>
+                </svg>
+            </div>
 
+            <div class="like">
                 <button type="button" class="like-button" data-video-id="{{ video.url_path }}" data-like="true"> <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M15.03 9.684h3.965c.322 0 .64.08.925.232.286.153.532.374.717.645a2.109 2.109 0 0 1 .242 1.883l-2.36 7.201c-.288.814-.48 1.355-1.884 1.355-2.072 0-4.276-.677-6.157-1.256-.472-.145-.924-.284-1.348-.404h-.115V9.478a25.485 25.485 0 0 0 4.238-5.514 1.8 1.8 0 0 1 .901-.83 1.74 1.74 0 0 1 1.21-.048c.396.13.736.397.96.757.225.36.32.788.269 1.211l-1.562 4.63ZM4.177 10H7v8a2 2 0 1 1-4 0v-6.823C3 10.527 3.527 10 4.176 10Z" clip-rule="evenodd"/>
-                    </svg></button>
+                    <path fill-rule="evenodd" d="M15.03 9.684h3.965c.322 0 .64.08.925.232.286.153.532.374.717.645a2.109 2.109 0 0 1 .242 1.883l-2.36 7.201c-.288.814-.48 1.355-1.884 1.355-2.072 0-4.276-.677-6.157-1.256-.472-.145-.924-.284-1.348-.404h-.115V9.478a25.485 25.485 0 0 0 4.238-5.514 1.8 1.8 0 0 1 .901-.83 1.74 1.74 0 0 1 1.21-.048c.396.13.736.397.96.757.225.36.32.788.269 1.211l-1.562 4.63ZM4.177 10H7v8a2 2 0 1 1-4 0v-6.823C3 10.527 3.527 10 4.176 10Z" clip-rule="evenodd"/>
+                </svg></button>
                 <span id="likes-count-{{ video.url_path }}">{{ video.num_likes }}</span>
-                </div>
-
-                <div CLASS="dislike">
+            </div>
+            <div CLASS="dislike">
                 <button type="button" class="dislike-button" data-video-id="{{ video.url_path }}" data-like="false"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M8.97 14.316H5.004c-.322 0-.64-.08-.925-.232a2.022 2.022 0 0 1-.717-.645 2.108 2.108 0 0 1-.242-1.883l2.36-7.201C5.769 3.54 5.96 3 7.365 3c2.072 0 4.276.678 6.156 1.256.473.145.925.284 1.35.404h.114v9.862a25.485 25.485 0 0 0-4.238 5.514c-.197.376-.516.67-.901.83a1.74 1.74 0 0 1-1.21.048 1.79 1.79 0 0 1-.96-.757 1.867 1.867 0 0 1-.269-1.211l1.562-4.63ZM19.822 14H17V6a2 2 0 1 1 4 0v6.823c0 .65-.527 1.177-1.177 1.177Z" clip-rule="evenodd"/>
-                    </svg></button>
+                    <path fill-rule="evenodd" d="M8.97 14.316H5.004c-.322 0-.64-.08-.925-.232a2.022 2.022 0 0 1-.717-.645 2.108 2.108 0 0 1-.242-1.883l2.36-7.201C5.769 3.54 5.96 3 7.365 3c2.072 0 4.276.678 6.156 1.256.473.145.925.284 1.35.404h.114v9.862a25.485 25.485 0 0 0-4.238 5.514c-.197.376-.516.67-.901.83a1.74 1.74 0 0 1-1.21.048 1.79 1.79 0 0 1-.96-.757 1.867 1.867 0 0 1-.269-1.211l1.562-4.63ZM19.822 14H17V6a2 2 0 1 1 4 0v6.823c0 .65-.527 1.177-1.177 1.177Z" clip-rule="evenodd"/>
+                </svg></button>
                 <span id="dislikes-count-{{ video.url_path }}">{{ video.num_dislikes }}</span>
-                </div>
-
-                <div class="views">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M4.998 7.78C6.729 6.345 9.198 5 12 5c2.802 0 5.27 1.345 7.002 2.78a12.713 12.713 0 0 1 2.096 2.183c.253.344.465.682.618.997.14.286.284.658.284 1.04s-.145.754-.284 1.04a6.6 6.6 0 0 1-.618.997 12.712 12.712 0 0 1-2.096 2.183C17.271 17.655 14.802 19 12 19c-2.802 0-5.27-1.345-7.002-2.78a12.712 12.712 0 0 1-2.096-2.183 6.6 6.6 0 0 1-.618-.997C2.144 12.754 2 12.382 2 12s.145-.754.284-1.04c.153-.315.365-.653.618-.997A12.714 12.714 0 0 1 4.998 7.78ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd"/>
-                    </svg>
-                     <p> {{ video.views }}</p>
-                </div>
-                </div>
-
-
-    <div class="description">
-        <p class="date">
-            {{ video.uploaded_at }}
-        </p>
-        <p>
-            {{ video.description }}
-        </p>
-        <p>Tagi:
-            {% for tag in video.tags.all %}
-                {{ tag.name }}{% if not forloop.last %}, {% endif %}
-            {% endfor %}
-        </p>
-    </div>
+            </div>
+            <div class="views">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M4.998 7.78C6.729 6.345 9.198 5 12 5c2.802 0 5.27 1.345 7.002 2.78a12.713 12.713 0 0 1 2.096 2.183c.253.344.465.682.618.997.14.286.284.658.284 1.04s-.145.754-.284 1.04a6.6 6.6 0 0 1-.618.997 12.712 12.712 0 0 1-2.096 2.183C17.271 17.655 14.802 19 12 19c-2.802 0-5.27-1.345-7.002-2.78a12.712 12.712 0 0 1-2.096-2.183 6.6 6.6 0 0 1-.618-.997C2.144 12.754 2 12.382 2 12s.145-.754.284-1.04c.153-.315.365-.653.618-.997A12.714 12.714 0 0 1 4.998 7.78ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd"/>
+                </svg>
+                <p> {{ video.views }}</p>
+            </div>
+        </div>
+        <div class="description">
+            </br>
+            <p class="date">
+                {{ video.uploaded_at }}
+            </p>
+            <p>
+                {{ video.description }}
+            </p>
+            <p>Tagi:
+                {% for tag in video.tags.all %}
+                    {{ tag.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+        </div>
+   </div>
+   <div class="similar-videos">
+<!--       <h2>Podobne filmy</h2>-->
+<!--        <div>-->
+<!--            {% for video in similar_videos %}-->
+<!--                <div>-->
+<!--                    <a href="{{ video.get_absolute_url }}">-->
+<!--                        <img src="" alt="{{ video.title }}" width="360px" height="200px">-->
+<!--                        <p>{{ video.title }}</p>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            {% endfor %}-->
+<!--        </div>-->
+       <div class="similar-video">
+           <img src="{% static 'images/foto.jpg' %}" alt="similar video" width="100%">
+           <p>Zobacz jak to zrobić</p>
+           <div class="similar-video-author">
+               <img src="{% static 'images/avatar.png' %}" class="avatar-similar-video">
+               <p>Autor 123</p>
+           </div>
+       </div>
+       <div class="similar-video">
+           <img src="{% static 'images/foto.jpg' %}" alt="similar video" width="100%">
+           <p>Zobacz jak to zrobić</p>
+           <div class="similar-video-author">
+               <img src="{% static 'images/avatar.png' %}" class="avatar-similar-video">
+               <p>Autor 123</p>
+           </div>
+       </div>
+              <div class="similar-video">
+           <img src="{% static 'images/foto.jpg' %}" alt="similar video" width="100%">
+           <p>Zobacz jak to zrobić</p>
+           <div class="similar-video-author">
+               <img src="{% static 'images/avatar.png' %}" class="avatar-similar-video">
+               <p>Autor 123</p>
+           </div>
+       </div>
+       <div class="similar-video">
+           <img src="{% static 'images/foto.jpg' %}" alt="similar video" width="100%">
+           <p>Zobacz jak to zrobić</p>
+           <div class="similar-video-author">
+               <img src="{% static 'images/avatar.png' %}" class="avatar-similar-video">
+               <p>Autor 123</p>
+           </div>
+       </div>
 </div>
-
-<div class="similar-videos">
-    <h2>Podobne filmy</h2>
-    {% for similar_video in similar_videos %}
-        <p>
-            <a href="{{ similar_video.get_absolute_url }}">{{ similar_video.title }}</a>
-        </p>
-    {% empty %}
-        <p>Brak podobnych filmów.</p>
-    {% endfor %}
-</div>
-
 {% endblock %}
+
