@@ -6,6 +6,8 @@ from django.http import HttpResponse, Http404
 from django.db.models import Count
 from .forms import VideoForm
 from django.utils.text import slugify
+from django.views.decorators.http import require_POST
+from django.http import JsonResponse
 from django.utils import timezone
 
 def all_videos(request):
