@@ -7,9 +7,11 @@ from django.db.models import Count
 from .forms import VideoForm
 from django.utils.text import slugify
 from django.utils import timezone
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 
 def all_videos(request):
-    video_list = Video.objects.all()
+    video_list = Video.objects.order_by('-uploaded_at')
     paginator = Paginator(video_list, 10)
     page_number = request.GET.get('page', 1)
     try:
@@ -85,3 +87,14 @@ def search_feature(request):
         return render(request, 'templates/base.html', {'query':search_query, 'posts':posts})
     else:
         return render(request, 'templates/base.html',{})
+
+@require_POST
+# @csrf_exempt
+def update_video_views(request, video_id):
+    try:
+        video = get_object_or_404(Video, url_path=video_id)
+        video.views += 1
+        video.save(update_fields=['views'])
+        return JsonResponse({'status': 'success', 'message': 'Video view count updated.', 'views': video.views})
+    except Video.DoesNotExist:
+        return JsonResponse({'status': 'error', 'message': 'Video not found.'}, status=404)

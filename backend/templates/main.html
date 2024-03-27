@@ -42,6 +42,9 @@
         <div class="d-flex flex-wrap">
             <div class="user-icon">User837</div>
             <div class="user-icon">MAriusz1</div>
+            {%for video in videos %}
+            <img src="{{video.thumbnail}}">
+            {% endfor %}
         </div>
     </div>
         {% endblock %}
