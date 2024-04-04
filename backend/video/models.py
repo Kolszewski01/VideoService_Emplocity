@@ -5,8 +5,6 @@ from django.conf import settings
 from taggit.managers import TaggableManager
 
 
-
-
 class Video(models.Model):
     class Type(models.TextChoices):
         PUBLIC = 'PB', 'Public'

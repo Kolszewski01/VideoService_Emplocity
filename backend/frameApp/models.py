@@ -1,13 +1,13 @@
 from django.db import models
 from userApp.models import MyUser
+
+
 class Frame(models.Model):
     frame_name = models.CharField(max_length=255)
     frame_url = models.URLField(max_length=255)
 
     def __str__(self):
         return self.frame_name
-
-
 
 
 class UserFrame(models.Model):

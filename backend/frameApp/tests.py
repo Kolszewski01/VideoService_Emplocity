@@ -3,6 +3,7 @@ from frameApp.models import Frame, UserFrame
 from userApp.models import MyUser
 from frameApp.serializers import FrameSerializer, UserFrameSerializer
 
+
 class FrameTestCase(TestCase):
     def setUp(self):
         self.frame = Frame.objects.create(frame_name="Test Frame", frame_url="http://example.com")
@@ -10,6 +11,7 @@ class FrameTestCase(TestCase):
     def test_frame_creation(self):
         self.assertEqual(self.frame.frame_name, "Test Frame")
         self.assertEqual(self.frame.frame_url, "http://example.com")
+
 
 class UserFrameTestCase(TestCase):
     def setUp(self):
@@ -21,6 +23,7 @@ class UserFrameTestCase(TestCase):
         self.assertEqual(self.user_frame.user, self.user)
         self.assertEqual(self.user_frame.frame, self.frame)
         self.assertEqual(str(self.user_frame), f'{self.user.username} - {self.frame.frame_name}')
+
 
 class FrameSerializerTest(TestCase):
     def setUp(self):
@@ -38,6 +41,7 @@ class FrameSerializerTest(TestCase):
     def test_frame_name_field_content(self):
         data = self.serializer.data
         self.assertEqual(data['frame_name'], self.frame_attributes['frame_name'])
+
 
 class UserFrameSerializerTest(TestCase):
     def setUp(self):

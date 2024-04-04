@@ -2,6 +2,7 @@ from django import forms
 from .models import Video
 from django.core.exceptions import ValidationError
 
+
 class VideoForm(forms.ModelForm):
     class Meta:
         model = Video
