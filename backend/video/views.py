@@ -103,3 +103,41 @@ def update_video_views(request, video_id):
         return JsonResponse({'status': 'success', 'message': 'Video view count updated.', 'views': video.views})
     except Video.DoesNotExist:
         return JsonResponse({'status': 'error', 'message': 'Video not found.'}, status=404)
+
+
+@login_required
+def add_comment(request, video_id):
+    video = get_object_or_404(Video, url_path=video_id)
+    parent_comment_id = request.POST.get('parent_id')
+    parent_comment = None
+
+    if parent_comment_id:
+        parent_comment = get_object_or_404(Comment, id=parent_comment_id)
+        if parent_comment.parent is not None:
+            parent_comment = None
+
+    if request.method == 'POST':
+        content = request.POST.get('content', '')
+        if content:
+            Comment.objects.create(
+                video=video,
+                author=request.user,
+                content=content,
+                parent=parent_comment
+            )
+            return redirect('video_details_by_id', video_id=video.url_path)
+
+    return redirect('video_details_by_id', video_id=video.url_path)
+
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+
+    if comment.author == request.user:
+        comment.delete()
+        return JsonResponse({'status': 'success', 'message': 'Komentarz został usunięty.'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Nie masz uprawnień do usunięcia tego komentarza.'}, status=403)
