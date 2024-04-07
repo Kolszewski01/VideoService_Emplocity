@@ -5,8 +5,6 @@ from django.conf import settings
 from taggit.managers import TaggableManager
 
 
-
-
 class Video(models.Model):
     class Type(models.TextChoices):
         PUBLIC = 'PB', 'Public'
@@ -44,3 +42,23 @@ class Video(models.Model):
                                               self.uploaded_at.month,
                                               self.uploaded_at.day,
                                               self.slug])
+
+
+class Comment(models.Model):
+    video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name='comments')
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, related_name='replies', null=True, blank=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Komentarz od {self.author} - {self.content[:20]}'
+
+    class Meta:
+        ordering = ['created_at']
+
+    def num_likes(self):
+        return self.likes.filter(like=True).count()
+
+    def num_dislikes(self):
+        return self.likes.filter(like=False).count()

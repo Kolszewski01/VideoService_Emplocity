@@ -3,6 +3,7 @@ from frameApp.models import Frame, UserFrame
 from userApp.models import MyUser
 from frameApp.serializers import FrameSerializer, UserFrameSerializer
 
+
 class FrameTestCase(TestCase):
     def setUp(self):
         self.frame = Frame.objects.create(frame_name="Test Frame", frame_url="http://example.com")
@@ -10,6 +11,7 @@ class FrameTestCase(TestCase):
     def test_frame_creation(self):
         self.assertEqual(self.frame.frame_name, "Test Frame")
         self.assertEqual(self.frame.frame_url, "http://example.com")
+
 
 class UserFrameTestCase(TestCase):
     def setUp(self):
@@ -21,6 +23,7 @@ class UserFrameTestCase(TestCase):
         self.assertEqual(self.user_frame.user, self.user)
         self.assertEqual(self.user_frame.frame, self.frame)
         self.assertEqual(str(self.user_frame), f'{self.user.username} - {self.frame.frame_name}')
+
 
 class FrameSerializerTest(TestCase):
     def setUp(self):
@@ -39,6 +42,7 @@ class FrameSerializerTest(TestCase):
         data = self.serializer.data
         self.assertEqual(data['frame_name'], self.frame_attributes['frame_name'])
 
+
 class UserFrameSerializerTest(TestCase):
     def setUp(self):
         self.user = MyUser.objects.create_user(username='testuser', email='test@example.com', password='testpass')
@@ -53,7 +57,7 @@ class UserFrameSerializerTest(TestCase):
     def test_user_field_content(self):
         data = self.serializer.data
         # Używam 'id_user' jako identyfikatora użytkownika
-        self.assertEqual(data['user'], self.user.id_user)
+        self.assertEqual(data['user'], self.user.id)
 
     def test_frame_field_content(self):
         data = self.serializer.data

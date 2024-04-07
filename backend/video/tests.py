@@ -1,6 +1,8 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase, Client
 from django.urls import reverse
-from .models import Video
+from .models import Video, Comment
+from like_dislikeApp.models import CommentLike
 from userApp.models import MyUser
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.utils import timezone
@@ -79,3 +81,45 @@ class UploadVideoViewTestCase(TestCase):
     def test_create_user_with_email(self):
         user = MyUser.objects.create_user(username='testuser2', password='testpassword2', email='test2@email.com')
         self.assertEqual(user.email, 'test2@email.com')
+
+
+
+User = get_user_model()
+
+class CommentModelTests(TestCase):
+
+    def setUp(self):
+        # Tworzenie użytkowników
+        self.user1 = User.objects.create_user(username='user1', email='user1@example.com', password='test12345')
+        self.user2 = User.objects.create_user(username='user2', email='user2@example.com', password='test12345')
+
+        # Tworzenie wideo
+        self.video = Video.objects.create(title='Test Video', description='Test Description', author=self.user1)
+
+        # Tworzenie komentarzy
+        self.comment1 = Comment.objects.create(video=self.video, author=self.user1, content='Pierwszy komentarz')
+        self.comment2 = Comment.objects.create(video=self.video, author=self.user2, content='Drugi komentarz', parent=self.comment1)
+
+        # Tworzenie polubień i niepolubień
+        CommentLike.objects.create(user=self.user1, comment=self.comment1, like=True)
+        CommentLike.objects.create(user=self.user2, comment=self.comment1, like=False)
+
+    def test_comment_creation(self):
+        self.assertEqual(self.comment1.author, self.user1)
+        self.assertEqual(self.comment1.video, self.video)
+        self.assertEqual(self.comment1.content, 'Pierwszy komentarz')
+        self.assertIsNone(self.comment1.parent)
+
+        # Sprawdzenie tworzenia komentarza podrzędnego
+        self.assertEqual(self.comment2.parent, self.comment1)
+
+    def test_comment_representation(self):
+        self.assertTrue(str(self.comment1).startswith('Komentarz od user1 - Pierwszy komentarz'))
+
+    def test_num_likes(self):
+        # Sprawdzenie liczby polubień dla comment1
+        self.assertEqual(self.comment1.num_likes(), 1)
+
+    def test_num_dislikes(self):
+        # Sprawdzenie liczby niepolubień dla comment1
+        self.assertEqual(self.comment1.num_dislikes(), 1)

@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+from typing import List
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,10 +29,8 @@ SECRET_KEY = 'django-insecure-%mft+3yu+=mhvbn2@xf%&n9x=b6ds0-5(51q46j92oo)5f%bcn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS: List[str] = []
 
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -80,7 +80,6 @@ TEMPLATES = [
 ]
 
 
-
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
@@ -97,7 +96,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
 
 
 LOGIN_REDIRECT_URL = '/'
@@ -165,4 +163,3 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 MEDIA_ROOT = '/var/lib/docker/volumes/videos/_data'
 MEDIA_URL = '/media/'
-

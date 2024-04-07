@@ -5,56 +5,65 @@
 
 {% block content %}
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var videoId = '{{ video.url_path }}';
+document.addEventListener('DOMContentLoaded', function() {
+    var videoId = '{{ video.url_path }}';
 
-        document.getElementById('shareLink').addEventListener('click', function(event) {
-            event.preventDefault();
-            var videoUrl = window.location.origin + '/videos/' + videoId + '/';
-            navigator.clipboard.writeText(videoUrl).then(function() {
-                alert('Link to this video has been copied to clipboard.');
-            }, function(err) {
-                console.error('Failed to copy link: ', err);
-            });
-        });
-
-        var video = document.querySelector('.video-detail');
-        var hasBeenCounted = false;
-
-        video.addEventListener('timeupdate', function() {
-            var threshold = video.duration * 0.25;
-
-            if (!hasBeenCounted && video.currentTime >= threshold) {
-                hasBeenCounted = true;
-
-                fetch(`/update_views/${videoId}/`, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRFToken': '{{ csrf_token }}',
-                        'Content-Type': 'application/json',
-                    },
-                })
-                .then(response => response.json())
-                .then(data => console.log(data.message))
-                .catch(error => console.error('Error:', error));
-            }
+    document.getElementById('shareLink').addEventListener('click', function(event) {
+        event.preventDefault();
+        var videoUrl = window.location.origin + '/videos/' + videoId + '/';
+        navigator.clipboard.writeText(videoUrl).then(function() {
+            alert('Link to this video has been copied to clipboard.');
+        }, function(err) {
+            console.error('Failed to copy link: ', err);
         });
     });
 
+    var video = document.querySelector('.video-detail');
+    var hasBeenCounted = false;
+    video.addEventListener('timeupdate', function() {
+        var threshold = video.duration * 0.25;
+        if (!hasBeenCounted && video.currentTime >= threshold) {
+            hasBeenCounted = true;
+            fetch(`/update_views/${videoId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => console.log(data.message))
+            .catch(error => console.error('Error:', error));
+        }
+    });
 
-    document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.like-button, .dislike-button').forEach(button => {
-        button.addEventListener('click', function (e) {
+        button.addEventListener('click', function(e) {
             e.preventDefault();
-            const videoId = this.dataset.videoId;
             const like = this.dataset.like === 'true';
-            sendLikeDislikeRequest(videoId, like);
+            sendLikeDislikeRequest('video', videoId, like);
         });
     });
 
-    function sendLikeDislikeRequest(videoId, like) {
+    document.querySelectorAll('.like-comment-button, .dislike-comment-button').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const commentId = this.dataset.id;
+            const like = this.dataset.like === 'true';
+            sendLikeDislikeRequest('comment', commentId, like);
+        });
+    });
+
+    function sendLikeDislikeRequest(type, id, like) {
         const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        fetch(`/like_dislike/video/${videoId}/${like ? 'like' : 'dislike'}/`, {
+        let url = '';
+        if (type === 'video') {
+            url = `/like_dislike/video/${id}/${like ? 'like' : 'dislike'}/`;
+        } else if (type === 'comment') {
+            url = `/like_dislike/comment/${id}/${like ? 'like' : 'dislike'}/`;
+        }
+
+        fetch(url, {
             method: 'POST',
             headers: {
                 'X-CSRFToken': csrfToken,
@@ -69,17 +78,39 @@
             return response.json();
         })
         .then(data => {
-            document.querySelector(`#likes-count-${videoId}`).innerText = data.num_likes;
-            document.querySelector(`#dislikes-count-${videoId}`).innerText = data.num_dislikes;
+            if (type === 'video') {
+               document.querySelector(`#likes-count-${videoId}`).innerText = data.num_likes;
+               document.querySelector(`#dislikes-count-${videoId}`).innerText = data.num_dislikes;
+            } else if (type === 'comment') {
+                const likesCountElement = document.querySelector(`#comment_${id} .like-comment-button`);
+                const dislikesCountElement = document.querySelector(`#comment_${id} .dislike-comment-button`);
+                likesCountElement.innerText = `Lubię to (${data.num_likes})`;
+                dislikesCountElement.innerText = `Nie lubię (${data.num_dislikes})`;
+            }
         })
         .catch(error => console.error('Error:', error));
     }
 });
+
+function showReplyForm(commentId) {
+    var isMainComment = event.target.getAttribute('data-is-main-comment') === 'true';
+    if (isMainComment) {
+        var replyForm = document.getElementById('reply-form-' + commentId);
+        if (replyForm.style.display === 'none') {
+            replyForm.style.display = 'block';
+        } else {
+            replyForm.style.display = 'none';
+        }
+    }
+}
+
+
+
 </script>
 
 <div class="main-detail">
     <div class="content-detail">
-        <video class="video-detail" width="100%"  controls>
+        <video class="video-detail" width="100%" controls>
             <source src="{{ video.video_file.url }}" type="video/mp4">
             Twoja przeglądarka nie wspiera znaczników video
         </video>
@@ -142,17 +173,6 @@
         </div>
    </div>
    <div class="similar-videos">
-<!--       <h2>Podobne filmy</h2>-->
-<!--        <div>-->
-<!--            {% for video in similar_videos %}-->
-<!--                <div>-->
-<!--                    <a href="{{ video.get_absolute_url }}">-->
-<!--                        <img src="" alt="{{ video.title }}" width="360px" height="200px">-->
-<!--                        <p>{{ video.title }}</p>-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--            {% endfor %}-->
-<!--        </div>-->
        <div class="similar-video">
            <img src="{% static 'images/foto.jpg' %}" alt="similar video" width="100%">
            <p>Zobacz jak to zrobić</p>
@@ -169,7 +189,7 @@
                <p>Autor 123</p>
            </div>
        </div>
-              <div class="similar-video">
+       <div class="similar-video">
            <img src="{% static 'images/foto.jpg' %}" alt="similar video" width="100%">
            <p>Zobacz jak to zrobić</p>
            <div class="similar-video-author">
@@ -186,5 +206,28 @@
            </div>
        </div>
 </div>
-{% endblock %}
-
+<div class="comments-section">
+    <h3>Komentarze</h3>
+    {% if user.is_authenticated %}
+        <form id="comment-form" action="{% url 'add_comment' video.url_path %}" method="post">
+            {% csrf_token %}
+            <textarea name="content" placeholder="Dodaj komentarz..."></textarea>
+            <button type="submit">Wyślij</button>
+        </form>
+        <form id="reply-form" action="{% url 'add_comment' video.url_path %}" method="post" style="display:none;">
+            {% csrf_token %}
+            <input type="hidden" id="parent-id" name="parent_id" value="">
+            <textarea name="content" placeholder="Odpowiedz na komentarz..."></textarea>
+            <button type="submit">Wyślij</button>
+        </form>
+    {% endif %}
+    <div class="comments-list">
+        {% for comment in comments %}
+            {% if not comment.parent %}
+                {% include 'comment_thread.html' with comment=comment %}
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+</div>
+{% endblock content %}

@@ -1,14 +1,14 @@
-import uuid
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Video
+from .models import Video, Comment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from django.db.models import Count
 from .forms import VideoForm
 from django.utils.text import slugify
 from django.views.decorators.http import require_POST
-from django.http import JsonResponse
 from django.utils import timezone
+
 
 def all_videos(request):
     video_list = Video.objects.all().order_by('-uploaded_at')
@@ -34,14 +34,19 @@ def video_detail(request, year=None, month=None, day=None, video=None, video_id=
         except ValueError:
             raise Http404("Nieprawidłowy format UUID")
     else:
-        video = get_object_or_404(Video, slug=video, uploaded_at__year=year, uploaded_at__month=month, uploaded_at__day=day)
+        video = get_object_or_404(Video, uploaded_at__year=year, uploaded_at__month=month,
+                                  uploaded_at__day=day, slug=video)
 
     video_tags_ids = video.tags.values_list('id', flat=True)
     similar_videos = Video.objects.filter(tags__id__in=video_tags_ids).exclude(id=video.id)
     similar_videos = similar_videos.annotate(same_tags=Count('tags')).order_by('-same_tags')[:4]
+    comments = video.comments.all()
 
-    return render(request, 'detail.html', {'video': video, 'similar_videos': similar_videos})
-
+    return render(request, 'detail.html', {
+        'video': video,
+        'similar_videos': similar_videos,
+        'comments': comments
+    })
 
 
 def upload_video(request):
@@ -73,22 +78,19 @@ def upload_video(request):
     else:
         form = VideoForm()
     return render(request, 'upload_video.html', {'form': form})
-    video_url = request.build_absolute_uri(video.get_absolute_url())
-    return HttpResponse(video_url)
 
-from django.shortcuts import render
-from .models import Video
 
 def search_feature(request):
     if request.method == 'POST':
         search_query = request.POST.get('search_query', '')
-        posts = Video.objects.filter(title__icontains=search_query).distinct() | Video.objects.filter(tags__name__icontains=search_query).distinct()
+        posts = (Video.objects.filter(title__icontains=search_query).distinct() |
+                 Video.objects.filter(tags__name__icontains=search_query).distinct())
         return render(request, 'search_video.html', {'query': search_query, 'posts': posts})
     else:
         return render(request, 'search_video.html', {})
 
+
 @require_POST
-# @csrf_exempt
 def update_video_views(request, video_id):
     try:
         video = get_object_or_404(Video, url_path=video_id)
@@ -99,3 +101,39 @@ def update_video_views(request, video_id):
         return JsonResponse({'status': 'error', 'message': 'Video not found.'}, status=404)
 
 
+@login_required
+def add_comment(request, video_id):
+    video = get_object_or_404(Video, url_path=video_id)
+    parent_comment_id = request.POST.get('parent_id')
+    parent_comment = None
+
+    if parent_comment_id:
+        parent_comment = get_object_or_404(Comment, id=parent_comment_id)
+        if parent_comment.parent is not None:
+            parent_comment = None
+
+    if request.method == 'POST':
+        content = request.POST.get('content', '')
+        if content:
+            Comment.objects.create(
+                video=video,
+                author=request.user,
+                content=content,
+                parent=parent_comment
+            )
+            return redirect('video_details_by_id', video_id=video.url_path)
+
+    return redirect('video_details_by_id', video_id=video.url_path)
+
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+
+    if comment.author == request.user:
+        comment.delete()
+        return JsonResponse({'status': 'success', 'message': 'Komentarz został usunięty.'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Nie masz uprawnień do usunięcia tego komentarza.'}, status=403)
