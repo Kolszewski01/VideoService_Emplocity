@@ -57,7 +57,7 @@ class UserFrameSerializerTest(TestCase):
     def test_user_field_content(self):
         data = self.serializer.data
         # Używam 'id_user' jako identyfikatora użytkownika
-        self.assertEqual(data['user'], self.user.id_user)
+        self.assertEqual(data['user'], self.user.id)
 
     def test_frame_field_content(self):
         data = self.serializer.data

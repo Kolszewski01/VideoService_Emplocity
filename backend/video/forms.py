@@ -1,6 +1,12 @@
 from django import forms
-from .models import Video
+from .models import Video, Comment
 from django.core.exceptions import ValidationError
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('content',)
 
 
 class VideoForm(forms.ModelForm):

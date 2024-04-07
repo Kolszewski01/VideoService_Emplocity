@@ -1,0 +1,35 @@
+<div class="comment" id="comment_{{ comment.id }}">
+    <p class="comment-author">{{ comment.author.username }}</p>
+    <p class="comment-content">{{ comment.content }}</p>
+    <div class="comment-actions">
+        <button class="like-comment-button" data-id="{{ comment.id }}" data-type="comment" data-like="true">Lubię to ({{ comment.num_likes }})</button>
+        <button class="dislike-comment-button" data-id="{{ comment.id }}" data-type="comment" data-like="false">Nie lubię ({{ comment.num_dislikes }})</button>
+        {% if user.is_authenticated and not comment.parent %}
+            <a href="javascript:void(0);" data-is-main-comment="true" onclick="showReplyForm('{{ comment.id }}');">Odpowiedz</a>
+        {% endif %}
+    </div>
+    {% if not comment.parent %}
+        <div id="reply-form-{{ comment.id }}" class="reply-form" style="display:none;">
+            <form action="{% url 'add_comment' video.url_path %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                <textarea name="content" placeholder="Odpowiedz na komentarz..."></textarea>
+                <button type="submit">Wyślij</button>
+            </form>
+        </div>
+    {% endif %}
+    {% if comment.replies.all %}
+        <div class="comment-replies">
+            {% for reply in comment.replies.all %}
+                <div class="reply" id="comment_{{ reply.id }}">
+                    <p class="reply-author">{{ reply.author.username }}</p>
+                    <p class="reply-content">{{ reply.content }}</p>
+                    <div class="reply-actions">
+                        <button class="like-comment-button" data-id="{{ reply.id }}" data-type="comment" data-like="true">Lubię to ({{ reply.num_likes }})</button>
+                        <button class="dislike-comment-button" data-id="{{ reply.id }}" data-type="comment" data-like="false">Nie lubię ({{ reply.num_dislikes }})</button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
