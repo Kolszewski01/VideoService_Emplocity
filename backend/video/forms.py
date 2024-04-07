@@ -8,6 +8,12 @@ import io
 from django.core.files.base import ContentFile
 
 
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('content',)
+
+
 def generate_thumbnail(video_file):
     try:
         with tempfile.NamedTemporaryFile(suffix='.mp4') as temp_video:
