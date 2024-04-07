@@ -1,4 +1,5 @@
 import uuid
+from django.views.generic.edit import CreateView
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Video
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -7,8 +8,10 @@ from django.db.models import Count
 from .forms import VideoForm
 from django.utils.text import slugify
 from django.utils import timezone
+from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
+
 
 def all_videos(request):
     video_list = Video.objects.order_by('-uploaded_at')
@@ -23,6 +26,7 @@ def all_videos(request):
 
     return render(request, 'all_videos.html', {'videos': videos})
 
+
 def video_detail(request, year=None, month=None, day=None, video=None, video_id=None):
     if video_id:
         try:
@@ -35,13 +39,13 @@ def video_detail(request, year=None, month=None, day=None, video=None, video_id=
 
     video.views += 1
     video.save(update_fields=['views'])
-
     video_tags_ids = video.tags.values_list('id', flat=True)
     similar_videos = Video.objects.filter(tags__id__in=video_tags_ids).exclude(id=video.id)
     similar_videos = similar_videos.annotate(same_tags=Count('tags')).order_by('-same_tags')[:4]
 
     return render(request, 'detail.html', {'video': video,
                                            'similar_videos': similar_videos})
+
 
 
 def upload_video(request):
@@ -75,6 +79,7 @@ def upload_video(request):
     return render(request, 'upload_video.html', {'form': form})
     video_url = request.build_absolute_uri(video.get_absolute_url())
     return HttpResponse(video_url)
+
 
 def search_feature(request):
     # Check if the request is a post request.

@@ -5,8 +5,6 @@ from django.conf import settings
 from taggit.managers import TaggableManager
 
 
-
-
 class Video(models.Model):
     class Type(models.TextChoices):
         PUBLIC = 'PB', 'Public'
@@ -39,3 +37,5 @@ class Video(models.Model):
                                               self.uploaded_at.month,
                                               self.uploaded_at.day,
                                               self.slug])
+
+

@@ -4,44 +4,44 @@
 
 {% block content %}
     <div class="videos">
-<!--        {% for video in videos %}-->
-<!--        <div class="video-container">-->
-<!--&lt;!&ndash;                1. zmienić avatar dla uzytkownmikow, 2.zmienic email -> username,&ndash;&gt;-->
-<!--                <div class="user-info">-->
-<!--                    <img src="../../static/images/avatar.png" class="avatar_user_videos">-->
-<!--                    <p class="author">{{ video.author.username }}</p>-->
-<!--                </div>-->
-<!--                <video width="720" height="480" controls>-->
-<!--                    <source src="{{ video.video_file.url }}" type="video/mp4">-->
-<!--                    Your browser does not support the video tag.-->
-<!--                </video>-->
-<!--                <img src="{{ video.video_file.url }}">-->
-<!--                <h2>-->
-<!--                    <a href="{{ video.get_absolute_url }}" class="title-video">-->
-<!--                        {{ video.title }}-->
-<!--                    </a>-->
-<!--                </h2>-->
-<!--                <img src="{{video.thumbnail}}">-->
-<!--    &lt;!&ndash;            <p class="date">&ndash;&gt;-->
-<!--    &lt;!&ndash;                Opublikwoany {{ video.uploaded_at }} przez {{ video.author }}&ndash;&gt;-->
-<!--    &lt;!&ndash;            </p>&ndash;&gt;-->
-<!--        </div>-->
-<!--        {% endfor %}-->
-{% for video in videos %}
-    <div class="video-item">
-        <h2>{{ video.title }}</h2>
-        <video width="320" height="240" controls>
-            <source src="{{ video.video_file.url }}" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        {% if video.thumbnail %}
-            <img src="{{ video.thumbnail.url }}" alt="Thumbnail">
-        {% else %}
-            <p>Brak miniaturki</p>
-        {% endif %}
-        <p>{{ video.description }}</p>
-    </div>
-{% endfor %}
+        {% for video in videos %}
+        <div class="video-container">
+<!--                1. zmienić avatar dla uzytkownmikow, 2.zmienic email -> username,-->
+                <div class="user-info">
+                    <img src="../../static/images/avatar.png" class="avatar_user_videos">
+                    <p class="author">{{ video.author.username }}</p>
+                </div>
+                <video width="720" height="480" controls>
+                    <source src="{{ video.video_file.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <img src="{{ video.video_file.url }}">
+                <h2>
+                    <a href="{{ video.get_absolute_url }}" class="title-video">
+                        {{ video.title }}
+                    </a>
+                </h2>
+                <img src="{{video.thumbnail}}">
+    <!--            <p class="date">-->
+    <!--                Opublikwoany {{ video.uploaded_at }} przez {{ video.author }}-->
+    <!--            </p>-->
+        </div>
+        {% endfor %}
+<!--{% for video in videos %}-->
+<!--    <div class="video-item">-->
+<!--        <h2>{{ video.title }}</h2>-->
+<!--        <video width="320" height="240" controls>-->
+<!--            <source src="{{ video.video_file.url }}" type="video/mp4">-->
+<!--            Your browser does not support the video tag.-->
+<!--        </video>-->
+<!--        {% if video.thumbnail %}-->
+<!--            <img src="{{ video.thumbnail.url }}" alt="Thumbnail">-->
+<!--        {% else %}-->
+<!--            <p>Brak miniaturki</p>-->
+<!--        {% endif %}-->
+<!--        <p>{{ video.description }}</p>-->
+<!--    </div>-->
+<!--{% endfor %}-->
     </div>
     {% include "pagination.html" with page=videos %}
 {% endblock %}

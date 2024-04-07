@@ -1,5 +1,5 @@
 from django import forms
-from .models import Video
+from .models import Video, Comment
 import tempfile
 from django.core.exceptions import ValidationError
 from moviepy.editor import VideoFileClip
@@ -10,25 +10,14 @@ from django.core.files.base import ContentFile
 
 def generate_thumbnail(video_file):
     try:
-        # Zapisz plik wideo tymczasowo na dysku
         with tempfile.NamedTemporaryFile(suffix='.mp4') as temp_video:
             for chunk in video_file.chunks():
                 temp_video.write(chunk)
-
-            # Utwórz obiekt VideoFileClip
             clip = VideoFileClip(temp_video.name)
-
-            # Wybierz klatkę z czasu t=1 (1 sekunda)
             frame = clip.get_frame(1)
-
-            # Konwertuj klatkę na obraz PIL
             image = Image.fromarray(frame)
-
-            # Zapisz obraz jako JPEG do pamięci
             thumbnail_bytes = io.BytesIO()
             image.save(thumbnail_bytes, format='JPEG')
-
-            # Zwróć miniaturkę jako obiekt ContentFile
             thumbnail_content = ContentFile(thumbnail_bytes.getvalue())
 
         return thumbnail_content
@@ -69,3 +58,4 @@ class VideoForm(forms.ModelForm):
             self.instance.thumbnail.save(video_file.name + '.png', thumbnail, save=False)
 
         return video_file
+
