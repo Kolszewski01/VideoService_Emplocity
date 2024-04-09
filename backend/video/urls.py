@@ -7,7 +7,7 @@ from . import views
 
 urlpatterns = [
     path('videos/<uuid:video_id>/', views.video_detail, name='video_details_by_id'),
-    path('all-videos/', all_videos, name='all_videos'),
+    path('', all_videos, name='all_videos'),
     path('<int:year>/<int:month>/<int:day>/<slug:video>', video_detail, name='video_details'),
     path('videos/<uuid:video_id>/', video_detail, name='video_details_by_id'),
     path('upload/', upload_video, name='upload_video'),

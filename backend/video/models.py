@@ -22,6 +22,7 @@ class Video(models.Model):
         null=True,
         blank=True
     )
+    thumbnail = models.ImageField(upload_to='video_thumbnails/', null=True, blank=True)
     type = models.CharField(max_length=2, choices=Type.choices, default=Type.PUBLIC)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     views = models.IntegerField(default=0)

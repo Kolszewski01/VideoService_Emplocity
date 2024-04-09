@@ -1,9 +1,9 @@
 import uuid
 from django.views.generic.edit import CreateView
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Video
+from .models import Video, Comment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from django.db.models import Count
 from .forms import VideoForm
 from django.utils.text import slugify
@@ -11,6 +11,7 @@ from django.utils import timezone
 from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 
 def all_videos(request):
@@ -37,14 +38,15 @@ def video_detail(request, year=None, month=None, day=None, video=None, video_id=
         video = get_object_or_404(Video, slug=video, uploaded_at__year=year, uploaded_at__month=month,
                                   uploaded_at__day=day)
 
-    video.views += 1
     video.save(update_fields=['views'])
     video_tags_ids = video.tags.values_list('id', flat=True)
     similar_videos = Video.objects.filter(tags__id__in=video_tags_ids).exclude(id=video.id)
     similar_videos = similar_videos.annotate(same_tags=Count('tags')).order_by('-same_tags')[:4]
+    comments = video.comments.all()
 
     return render(request, 'detail.html', {'video': video,
-                                           'similar_videos': similar_videos})
+                                           'similar_videos': similar_videos,
+                                           'comments': comments})
 
 
 
@@ -89,9 +91,9 @@ def search_feature(request):
         # Filter your model by the search query
         posts = Model.objects.filter(title__contains=search_query)
         posts += Model.objects.filter(tags__contains=search_query)
-        return render(request, 'templates/base.html', {'query':search_query, 'posts':posts})
+        return render(request, 'base.html', {'query':search_query, 'posts':posts})
     else:
-        return render(request, 'templates/base.html',{})
+        return render(request, 'base.html',{})
 
 @require_POST
 # @csrf_exempt
@@ -130,7 +132,7 @@ def add_comment(request, video_id):
     return redirect('video_details_by_id', video_id=video.url_path)
 
 
-from django.contrib.auth.decorators import login_required
+
 
 @login_required
 def delete_comment(request, comment_id):
