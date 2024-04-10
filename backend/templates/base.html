@@ -12,7 +12,7 @@
 <body>
      <nav class="nav-bar">
         <div class="logo-container">
-             <a class="logo" href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
+             <a class="logo" href="{% url 'all_videos' %}"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
         </div>
         <form class="d-flex" role="search" method="POST">
             {% csrf_token %}
