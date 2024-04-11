@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Video, Comment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse, Http404, JsonResponse
-from django.db.models import Count
+from django.db.models import Count, Q
 from .forms import VideoForm
 from django.utils.text import slugify
 from django.utils import timezone
@@ -13,9 +13,29 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
-
+"""" Widok do ładowania wszystkich publicznych plików Video z sortowanie"""
 def all_videos(request):
-    video_list = Video.objects.order_by('-uploaded_at')
+    sort_by = request.GET.get('sort_by')
+    sort_order = request.GET.get('sort_order')
+
+    if sort_by == 'uploaded_at':
+        if sort_order == 'asc':
+            video_list = Video.objects.filter(type=Video.Type.PUBLIC).order_by('uploaded_at')
+        else:
+            video_list = Video.objects.filter(type=Video.Type.PUBLIC).order_by('-uploaded_at')
+    elif sort_by == 'views':
+        if sort_order == 'asc':
+            video_list = Video.objects.filter(type=Video.Type.PUBLIC).order_by('views')
+        else:
+            video_list = Video.objects.filter(type=Video.Type.PUBLIC).order_by('-views')
+    elif sort_by == 'likes':
+        if sort_order == 'asc':
+            video_list = Video.objects.filter(type=Video.Type.PUBLIC).annotate(num_likes=Count('likes', filter=Q(likes=True))).order_by('num_likes')
+        else:
+            video_list = Video.objects.filter(type=Video.Type.PUBLIC).annotate(num_likes=Count('likes', filter=Q(likes=True))).order_by('-num_likes')
+    else:
+        video_list = Video.objects.filter(type=Video.Type.PUBLIC).order_by('-uploaded_at')
+
     paginator = Paginator(video_list, 10)
     page_number = request.GET.get('page', 1)
     try:
@@ -75,7 +95,7 @@ def upload_video(request):
 
             video.tags.set(tags_list)
 
-            return redirect('home')
+            return redirect('all_videos')
     else:
         form = VideoForm()
     return render(request, 'upload_video.html', {'form': form})
