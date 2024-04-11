@@ -171,6 +171,28 @@ function showReplyForm(commentId) {
                 {% endfor %}
             </p>
         </div>
+        <div class="comments-section">
+            {% if user.is_authenticated %}
+                <form id="comment-form" action="{% url 'add_comment' video.url_path %}" method="post">
+                    {% csrf_token %}
+                    <textarea name="content" placeholder="Dodaj komentarz..."></textarea>
+                    <button type="submit">Wyślij</button>
+                </form>
+                <form id="reply-form" action="{% url 'add_comment' video.url_path %}" method="post" style="display:none;">
+                    {% csrf_token %}
+                    <input type="hidden" id="parent-id" name="parent_id" value="">
+                    <textarea name="content" placeholder="Odpowiedz na komentarz..."></textarea>
+                    <button type="submit">Wyślij</button>
+                </form>
+            {% endif %}
+            <div class="comments-list">
+                {% for comment in comments %}
+                    {% if not comment.parent %}
+                        {% include 'comment_thread.html' with comment=comment %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
    </div>
    <div class="similar-videos">
        <div class="similar-video">
@@ -206,28 +228,6 @@ function showReplyForm(commentId) {
            </div>
        </div>
 </div>
-<div class="comments-section">
-    <h3>Komentarze</h3>
-    {% if user.is_authenticated %}
-        <form id="comment-form" action="{% url 'add_comment' video.url_path %}" method="post">
-            {% csrf_token %}
-            <textarea name="content" placeholder="Dodaj komentarz..."></textarea>
-            <button type="submit">Wyślij</button>
-        </form>
-        <form id="reply-form" action="{% url 'add_comment' video.url_path %}" method="post" style="display:none;">
-            {% csrf_token %}
-            <input type="hidden" id="parent-id" name="parent_id" value="">
-            <textarea name="content" placeholder="Odpowiedz na komentarz..."></textarea>
-            <button type="submit">Wyślij</button>
-        </form>
-    {% endif %}
-    <div class="comments-list">
-        {% for comment in comments %}
-            {% if not comment.parent %}
-                {% include 'comment_thread.html' with comment=comment %}
-            {% endif %}
-        {% endfor %}
-    </div>
-</div>
+
 </div>
 {% endblock content %}
