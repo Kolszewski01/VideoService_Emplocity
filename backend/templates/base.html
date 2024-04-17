@@ -8,23 +8,30 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'main.css'%}">
+    <link rel="stylesheet" href="{% static 'video-detail.css'%}">
 </head>
 <body>
      <nav class="nav-bar">
         <div class="logo-container">
-             <a class="logo" href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
+             <a class="logo" href="{% url 'all_videos' %}"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
         </div>
-
-        <div class="search-container">
-            <input id="search" type="search" label="search-bar" placeholder="Szukaj">
-            <button type="submit" class="search-button"></button>
-        </div>
-
+        <form class="d-flex" role="search" method="POST">
+            {% csrf_token %}
+            <input
+                    class="form-control me-2"
+                    type="search"
+                    label="search-bar"
+                    placeholder="Szukaj"
+                    name="search_query"
+                    required aria-label="Search"
+            >
+            <button class="search-button" type="submit"></button>
+        </form>
         <div class="login">
                 {% if user.is_authenticated %}
                         <form action="{% url 'logout' %}" method="post">
                             {% csrf_token %}
-                            <button type="submit" class="account-button">AAAAAAAAA</button>
+                            <button type="submit" class="btt account-button"></button>
                         </form>
                 {% else %}
 
@@ -43,7 +50,9 @@
 
             <div class="user-icon">User837</div>
             <div class="user-icon">MAriusz1</div>
-
+            {%for video in videos %}
+            <img src="{{video.thumbnail}}">
+            {% endfor %}
         </div>
         {% endblock %}
 

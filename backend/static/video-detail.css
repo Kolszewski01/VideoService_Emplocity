@@ -1,0 +1,141 @@
+.comments-section{
+    padding: 10px;
+}
+#comment-form textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+#comment-form button {
+    padding: 10px 20px;
+    background-color: #285467;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+#comment-form button:hover {
+    background-color: #4192b4;
+}
+/* Styl dla formularza podkomentarzy */
+.reply-form {
+    margin-top: 10px; /* Dodaj odstęp na górze formularza */
+}
+
+.reply-form form {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.reply-form textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.reply-form button {
+    padding: 10px 20px;
+    background-color: #285467;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.reply-form button:hover {
+    background-color: #4192b4; /* Zmiana koloru tła przycisku podczas najechania */
+}
+
+.like-comment-button,
+.dislike-comment-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #fdfdfd; /* Domyślnie biały kolor tekstu */
+    transition: color 0.3s ease; /* Płynna zmiana koloru */
+}
+.like-comment-button[data-like="true"] {
+    color: #55BAE7;
+    outline: none;
+}
+
+.dislike-comment-button[data-like="false"] {
+    color: #e53453;
+    outline: none;
+}
+
+.like-comment-button[data-like="false"]:active {
+    color: #fdfdfd;
+}
+
+.dislike-comment-button[data-like="true"]:active {
+    color: #fdfdfd;
+}
+
+.like-comment-button:hover,
+.dislike-comment-button:hover {
+    color: #fdfdfd;
+}
+
+.comments-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.comment {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #326d86;
+
+}
+
+.comment-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.comment-content {
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+.comment-user-info{
+    display: flex;
+    margin-bottom: 5px;
+}
+.comment-author{
+    font-weight: bold;
+}
+.avatar_user_comment{
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+.reply{
+    margin-left: 25px;
+}
+.reply-user-info{
+    display: flex;
+    margin-top: 10px;
+}

@@ -1,32 +1,13 @@
 {% extends "base.html" %}
-{% load static%}
 
-{% block title %}Wszystkie Video{% endblock %}
+{% block title %}Wyniki wyszukiwania{% endblock %}
 
 {% block content %}
-<div>
-<form method="GET" action="">
-    <label for="sort_by">Sortuj według:</label>
-    <select name="sort_by" id="sort_by">
-        <option value="uploaded_at">Data dodania</option>
-        <option value="views">Liczba wyświetleń</option>
-        <option value="likes">Liczba polubień</option>
-    </select>
-
-    <label for="sort_order">Kolejność sortowania:</label>
-    <select name="sort_order" id="sort_order">
-        <option value="desc">Malejąco</option>
-        <option value="asc">Rosnąco</option>
-    </select>
-
-    <button type="submit">Sortuj</button>
-</form>
-</div>
 <div class="videos">
-    {% for video in videos %}
-    <div class="video-container">
+    {% for video in posts %}
+    <div class="video-container" id="video-{{ video.id }}">
         <div class="user-info">
-            <img src="{% static 'images/avatar.png' %}" class="avatar_user_videos">
+            <img src="../../static/images/avatar.png" class="avatar_user_videos">
             <p class="author">{{ video.author.username }}</p>
         </div>
         <video width="720" height="480" controls>
@@ -36,11 +17,18 @@
         <h2>
             <a href="{{ video.get_absolute_url }}" class="title-video">{{ video.title }}</a>
         </h2>
-
+        <div class="like-dislike-buttons">
+            <button type="button" class="like-button" data-video-id="{{ video.url_path }}" data-like="true">Like</button>
+            <span id="likes-count-{{ video.url_path }}">{{ video.num_likes }}</span>
+            <button type="button" class="dislike-button" data-video-id="{{ video.url_path }}" data-like="false">Dislike</button>
+            <span id="dislikes-count-{{ video.url_path }}">{{ video.num_dislikes }}</span>
+        </div>
     </div>
+    {% empty %}
+    <p>Brak wyników wyszukiwania.</p>
     {% endfor %}
 </div>
-{% include "pagination.html" with page=videos %}
+{% include "pagination.html" with page=posts %}
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.like-button, .dislike-button').forEach(button => {

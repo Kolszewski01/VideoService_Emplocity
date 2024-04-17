@@ -11,7 +11,7 @@
 <body>
     <nav class="nav-bar">
         <div class="logo-container">
-             <a class="logo" href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
+             <a class="logo" href="{% url 'all_videos' %}"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
         </div>
         <div class="search-container">
             <input id="search" type="search" label="search-bar" placeholder="Szukaj">
@@ -38,11 +38,60 @@
     </nav>
         {% block content %}
     <div class="container">
-        <h2>Popularne teraz</h2>
-        <div class="d-flex flex-wrap">
-            <div class="user-icon">User837</div>
-            <div class="user-icon">MAriusz1</div>
+    <div class="videos">
+    {% for video in videos %}
+    <div class="video-container">
+        <div class="user-info">
+            <img src="{% static 'images/avatar.png' %}" class="avatar_user_videos">
+            <p class="author">{{ video.author.username }}</p>
         </div>
+        <video width="720" height="480" controls>
+            <source src="{{ video.video_file.url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h2>
+            <a href="{{ video.get_absolute_url }}" class="title-video">{{ video.title }}</a>
+        </h2>
+
+    </div>
+    {% endfor %}
+</div>
+{% include "pagination.html" with page=videos %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.like-button, .dislike-button').forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+            const videoId = this.dataset.videoId;
+            const like = this.dataset.like === 'true';
+            sendLikeDislikeRequest(videoId, like);
+        });
+    });
+
+    function sendLikeDislikeRequest(videoId, like) {
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        fetch(`/like_dislike/video/${videoId}/${like ? 'like' : 'dislike'}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrfToken,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 'like': like }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.querySelector(`#likes-count-${videoId}`).innerText = data.num_likes;
+            document.querySelector(`#dislikes-count-${videoId}`).innerText = data.num_dislikes;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+});
+</script>
     </div>
         {% endblock %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
