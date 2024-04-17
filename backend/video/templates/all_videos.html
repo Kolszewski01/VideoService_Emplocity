@@ -4,22 +4,22 @@
 {% block title %}Wszystkie Video{% endblock %}
 
 {% block content %}
-<div>
-<form method="GET" action="">
-    <label for="sort_by">Sortuj według:</label>
-    <select name="sort_by" id="sort_by">
+<div class="div-filtr">
+<form method="GET" action="" class="form-filtr">
+    <label for="sort_by" >Sortuj według:</label>
+    <select name="sort_by" id="sort_by" class="filtr-lista" >
         <option value="uploaded_at">Data dodania</option>
         <option value="views">Liczba wyświetleń</option>
         <option value="likes">Liczba polubień</option>
     </select>
 
     <label for="sort_order">Kolejność sortowania:</label>
-    <select name="sort_order" id="sort_order">
+    <select name="sort_order" id="sort_order" class="filtr-lista">
         <option value="desc">Malejąco</option>
         <option value="asc">Rosnąco</option>
     </select>
 
-    <button type="submit">Sortuj</button>
+    <button type="submit" class="filtr-button">Sortuj</button>
 </form>
 </div>
 <div class="videos">

@@ -380,4 +380,43 @@ input[type="search"]:focus {
     height: 25px;
 }
 
+.div-filtr{
+    background-color: #E63453;
+    margin: 0;
+}
 
+.filtr-lista{
+    border-radius: 4px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: #E63453;
+    color: white;
+    position: relative;
+    border-left: #55BAE7;
+    border-right: #55BAE7;
+    overflow: hidden;
+    border-top: #007bff;
+}
+.filtr-lista:hover {
+    content: '';
+    position: relative;
+    color: whitesmoke;
+    background-color: #E63453;
+    border-radius: 4px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.form-filtr{
+    padding-top: 5px;
+    padding-left: 30%;
+}
+
+.filtr-button{
+    background-color: #55b9e6;
+    color: #fff;
+    font-size: 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin-left: 5px;
+}
