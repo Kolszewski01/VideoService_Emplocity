@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h1>Moje filmy</h1>
+    <ul>
+        {% for video in user_videos %}
+            <li>
+                <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+                <img src="{{ video.thumbnail.url }}" alt="{{ video.title }}">
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

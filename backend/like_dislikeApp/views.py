@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from video.models import Video, Comment
 from .models import Like, CommentLike
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView
 
 
 @login_required
@@ -25,3 +27,11 @@ def like_or_dislike_comment(request, comment_id, like=True):
     num_dislikes = comment.likes.filter(like=False).count()
 
     return JsonResponse({'num_likes': num_likes, 'num_dislikes': num_dislikes})
+
+class UserLikedVideosListView(LoginRequiredMixin, ListView):
+    model = Like
+    template_name = 'liked_videos.html'
+    context_object_name = 'liked_videos'
+
+    def get_queryset(self):
+        return Like.objects.filter(user=self.request.user, like=True)

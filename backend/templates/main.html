@@ -14,8 +14,18 @@
              <a class="logo" href="{% url 'all_videos' %}"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
         </div>
         <div class="search-container">
-            <input id="search" type="search" label="search-bar" placeholder="Szukaj">
-            <button type="submit" class="search-button"></button>
+            <form class="d-flex" role="search" action="{% url 'search_feature' %}" method="POST">
+                {% csrf_token %}
+                <input
+                    class="form-control me-2"
+                    type="search"
+                    label="search-bar"
+                    placeholder="Szukaj"
+                    name="search_query"
+                    required aria-label="Search"
+                >
+                <button class="search-button" type="submit" href="{% url 'search_feature' %}"></button>
+            </form>
         </div>
         <div class="login">
                 {% if user.is_authenticated %}

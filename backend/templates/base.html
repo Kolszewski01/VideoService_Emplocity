@@ -9,55 +9,84 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'main.css'%}">
     <link rel="stylesheet" href="{% static 'video-detail.css'%}">
+<style>
+    .dropdown-list {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+    }
+
+    .dropdown-list.active {
+        display: block;
+    }
+
+    .login {
+        position: relative;
+    }
+</style>
 </head>
 <body>
-     <nav class="nav-bar">
-        <div class="logo-container">
-             <a class="logo" href="{% url 'all_videos' %}"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
-        </div>
-        <form class="d-flex" role="search" method="POST">
-            {% csrf_token %}
-            <input
-                    class="form-control me-2"
-                    type="search"
-                    label="search-bar"
-                    placeholder="Szukaj"
-                    name="search_query"
-                    required aria-label="Search"
-            >
-            <button class="search-button" type="submit"></button>
-        </form>
-        <div class="login">
-                {% if user.is_authenticated %}
-                        <form action="{% url 'logout' %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="btt account-button"></button>
-                        </form>
-                {% else %}
+<nav class="nav-bar">
+    <div class="logo-container">
+        <a class="logo" href="{% url 'all_videos' %}"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
+    </div>
+    <form class="d-flex" role="search" action="{% url 'search_feature' %}" method="POST">
+        {% csrf_token %}
+        <input
+                class="form-control me-2"
+                type="search"
+                label="search-bar"
+                placeholder="Szukaj"
+                name="search_query"
+                required aria-label="Search"
+        >
+        <button class="search-button" type="submit" href="{% url 'search_feature' %}"></button>
+    </form>
+    <div class="login">
+        {% if user.is_authenticated %}
+            <button class="btt account-button" style="background-image: url('{{ user.avatar.url }}')" onclick="toggleDropdown()"></button>
+                <select id="dropdownList" class="dropdown-list" onchange="if (this.value) window.location.href=this.value">
+                    <option selected disabled>Wybierz akcję</option>
+                    <option value="{% url 'upload_video' %}">Wrzuć film</option>
+                    <option value="{% url 'change_avatar' %}">Zmień avatar</option>
+                    <option value="{% url 'my_videos' %}">Twoje Filmy</option>
+                    <option value="{% url 'liked_videos' %}">Polubione filmy</option>
 
-             <a href="{% url 'login' %}" class="login-button">
-
+                </select>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <!-- To jest przycisk avatr ktory wylogowuje, zamienic avatar pod user, rozwinać liste a nie wylogowywac -->
+                    <button type="submit" > Wyloguj </button>
+                </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="login-button">
                 <span class="ml-2">Zaloguj</span>
-             </a>
-        </div>
-                {% endif %}
+            </a>
+        {% endif %}
+    </div>
+</nav>
 
-    </nav>
-        {% block content %}
+{% block content %}
 
-        <h2>Popularne teraz</h2>
-        <div class="d-flex flex-wrap">
+<h2>Popularne teraz</h2>
+<div class="d-flex flex-wrap">
+    <div class="user-icon">User837</div>
+    <div class="user-icon">MAriusz1</div>
+    {% for video in videos %}
+        <img src="{{ video.thumbnail }}">
+    {% endfor %}
+</div>
+{% endblock %}
 
-            <div class="user-icon">User837</div>
-            <div class="user-icon">MAriusz1</div>
-            {%for video in videos %}
-            <img src="{{video.thumbnail}}">
-            {% endfor %}
-        </div>
-        {% endblock %}
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy4Ck4SOF4y4Ck4C2DgHfViXydVeLm+JDM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy4Ck4SOF4y4Ck4C2DgHfViXydVeLm+JDM" crossorigin="anonymous"></script>
+<script>
+    function toggleDropdown() {
+        const dropdownList = document.getElementById('dropdownList');
+        dropdownList.classList.toggle('active');
+    }
+</script>
 </body>
 </html>

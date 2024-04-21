@@ -104,16 +104,13 @@ def upload_video(request):
 
 
 def search_feature(request):
-    # Check if the request is a post request.
     if request.method == 'POST':
-        # Retrieve the search query entered by the user
-        search_query = request.POST['search_query']
-        # Filter your model by the search query
-        posts = Model.objects.filter(title__contains=search_query)
-        posts += Model.objects.filter(tags__contains=search_query)
-        return render(request, 'base.html', {'query':search_query, 'posts':posts})
+        search_query = request.POST.get('search_query', '')
+        posts = Video.objects.filter(title__icontains=search_query).distinct() | Video.objects.filter(tags__name__icontains=search_query).distinct()
+        return render(request, 'search_video.html', {'query': search_query, 'posts': posts})
     else:
-        return render(request, 'base.html',{})
+        return render(request, 'search_video.html', {})
+
 
 @require_POST
 # @csrf_exempt
