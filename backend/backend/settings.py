@@ -29,7 +29,11 @@ SECRET_KEY = 'django-insecure-%mft+3yu+=mhvbn2@xf%&n9x=b6ds0-5(51q46j92oo)5f%bcn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS: List[str] = []
+ALLOWED_HOSTS: List[str] = ['13da-88-156-14-190.ngrok-free.app','localhost','secure.snd.payu.com']
+
+CSRF_TRUSTED_ORIGINS = ['https://*.ngrok-free.app','https://secure.snd.payu.com']
+
+
 
 
 INSTALLED_APPS = [
@@ -158,8 +162,28 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = 'popocompany53@gmail.com'
+EMAIL_HOST_PASSWORD = 'pgfo tkpk wfpw bluv'
 
 MEDIA_ROOT = '/var/lib/docker/volumes/videos/_data'
 MEDIA_URL = '/media/'
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': '/backend/test/error.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}

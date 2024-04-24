@@ -11,3 +11,5 @@ sqlparse==0.4.4
 six
 django-taggit
 moviepy
+django-payments-payu==1.4.0
+requests_kerberos
