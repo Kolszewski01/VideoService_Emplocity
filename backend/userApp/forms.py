@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import ValidationError
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
@@ -24,8 +25,16 @@ class MyUserRegistrationForm(UserCreationForm):
 
 class AvatarChangeForm(forms.ModelForm):
     class Meta:
-        model = MyUser
+        model = User
         fields = ['avatar']
+
+    def clean_avatar(self):
+        avatar = self.cleaned_data['avatar']
+        if avatar:
+            if avatar.name.endswith('.gif'):
+                raise ValidationError("Nie możesz ustwaić gifu na avatar. Mozesz jedynie kupić ;)")
+        return avatar
+
 
 class CustomUserCreationForm(UserCreationForm):
 

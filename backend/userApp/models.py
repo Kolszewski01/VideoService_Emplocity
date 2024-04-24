@@ -5,6 +5,10 @@ from .managers import CustomUserManager
 import uuid
 
 
+def default_avatar():
+    return 'static/images/avatar.png'
+
+
 class MyUser(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     username = models.CharField(max_length=35)
@@ -15,7 +19,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
-    avatar = models.ImageField(upload_to='users/avatars', blank=True, null=True)
+    avatar = models.ImageField(upload_to='users/avatars', blank=True, null=True, default=default_avatar)
 
     objects = CustomUserManager()
 
