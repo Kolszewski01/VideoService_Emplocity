@@ -64,10 +64,13 @@ def video_detail(request, year=None, month=None, day=None, video=None, video_id=
     similar_videos = similar_videos.annotate(same_tags=Count('tags')).order_by('-same_tags')[:4]
     comments = video.comments.all()
 
+    sidebar_videos = Video.objects.exclude(id=video.id).filter(tags__id__in=video_tags_ids).annotate(
+        same_tags=Count('tags')).order_by('-same_tags', '-views')[:5]
+
     return render(request, 'detail.html', {'video': video,
                                            'similar_videos': similar_videos,
-                                           'comments': comments})
-
+                                           'comments': comments,
+                                           'sidebar_videos': sidebar_videos})
 
 
 def upload_video(request):
