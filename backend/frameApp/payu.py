@@ -1,16 +1,12 @@
 import http.client
+import json
 import uuid
-
+import requests
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404
-from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 from .models import Frame
 from userApp.models import MyUser
-import requests
-import http.client
-import json
-from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-
 
 PAYU_POS_ID = 478178
 PAYU_SECOND_KEY = 'cef91e0035a7ee39b7702b5df63c0bdf'
@@ -21,7 +17,6 @@ PAYU_ORDER_URL = 'https://secure.snd.payu.com/api/v2_1/orders'
 PAYU_OAUTH_URL = 'https://secure.snd.payu.com/pl/standard/user/oauth/authorize'
 
 
-@csrf_exempt
 def get_payu_token(request):
     data = {
         'grant_type': 'client_credentials',
@@ -38,7 +33,6 @@ def get_payu_token(request):
         return {"error": "Failed to get token", "status": response.status_code, "details": response.text}
 
 
-@csrf_exempt
 def create_order(request, frame_id):
     try:
         frame = get_object_or_404(Frame, pk=frame_id)
@@ -78,14 +72,20 @@ def create_order(request, frame_id):
         conn.request("POST", "/api/v2_1/orders", body=order, headers=headers)
         response = conn.getresponse()
         response_data = response.read().decode('utf-8')
+
+        data_dict = json.loads(response_data)
+
+        order_id = data_dict['orderId']
+        request.session['order_id'] = order_id
+
         conn.close()
-        print(response_data)
 
         if response.status in (200, 201, 302):
             response_json = json.loads(response_data)
+
             redirect_uri = response_json.get('redirectUri')
+
             if redirect_uri:
-                # Zwróć przekierowanie do PayU zamiast JSON
                 return HttpResponseRedirect(redirect_uri)
             else:
                 return JsonResponse({"error": "Redirect URI not found"}, status=404)
@@ -95,23 +95,31 @@ def create_order(request, frame_id):
         return JsonResponse({'error': 'Internal server error', 'details': str(e)}, status=500)
 
 
-@csrf_exempt
+# @csrf_exempt
 def payment_success(request):
     try:
-        frame_id = request.session.get('purchased_frame_id')
-        if not frame_id:
-            return HttpResponse("Brak informacji o ramce.", status=400)
+        token_data = get_payu_token(request)
+        access_token = token_data.get('access_token')
 
+        frame_id = request.session.get('purchased_frame_id')
         frame = Frame.objects.get(id=frame_id)
         user = request.user
 
-        status = request.POST.get('status', request.GET.get('status'))
-        print(status)
+        conn = http.client.HTTPSConnection("secure.snd.payu.com")
+        headers = {
+            'Authorization': f'Bearer {access_token}',
+            'Content-Type': 'application/json'
+        }
 
-        if status == 'SUCCESS':
+        conn.request("GET", f"/api/v2_1/orders/{request.session['order_id']}", headers=headers)
+        response = conn.getresponse()
+        response_data = response.read().decode('utf-8')
+        response_json = json.loads(response_data)
+        conn.close()
+
+        if response_json['status']['statusCode'] == 'SUCCESS':
             user.avatar = frame.frame_url
             user.save()
-
             del request.session['purchased_frame_id']
 
             return HttpResponse("Płatność została zakończona pomyślnie i avatar został zaktualizowany.")

@@ -1,9 +1,9 @@
 
-*/migrations/*
+**/migrations/
 !*/migrations/__init__.py
-
+email_config.py
 .env
-
+.idea/
 
 *.pyc
 __pycache__/

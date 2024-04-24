@@ -16,7 +16,6 @@ from dotenv import load_dotenv
 from typing import List
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -156,34 +155,19 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = 'userApp.MyUser'
 
-load_dotenv()
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+
+from .email_config import EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'popocompany53@gmail.com'
-EMAIL_HOST_PASSWORD = 'pgfo tkpk wfpw bluv'
+
 
 MEDIA_ROOT = '/var/lib/docker/volumes/videos/_data'
 MEDIA_URL = '/media/'
 
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': '/backend/test/error.log',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    },
-}
