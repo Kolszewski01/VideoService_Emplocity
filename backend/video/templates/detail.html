@@ -119,7 +119,7 @@ function showReplyForm(commentId) {
         </p>
 
         <div class="user-info-detail">
-            <img src="{% static 'images/avatar.png' %}" class="avatar_user_detail">
+            <img src="{{ video.author.avatar.url }}" class="avatar_user_detail">
             <p class="user-name-detail">{{ video.author.username }}</p>
 
             <div class="user-name-detail-right">
@@ -194,40 +194,56 @@ function showReplyForm(commentId) {
             </div>
         </div>
    </div>
-   <div class="similar-videos">
-       <div class="similar-video">
-           <img src="{% static 'images/foto.jpg' %}" alt="similar video" width="100%">
-           <p>Zobacz jak to zrobić</p>
-           <div class="similar-video-author">
-               <img src="{% static 'images/avatar.png' %}" class="avatar-similar-video">
-               <p>Autor 123</p>
-           </div>
-       </div>
-       <div class="similar-video">
-           <img src="{% static 'images/foto.jpg' %}" alt="similar video" width="100%">
-           <p>Zobacz jak to zrobić</p>
-           <div class="similar-video-author">
-               <img src="{% static 'images/avatar.png' %}" class="avatar-similar-video">
-               <p>Autor 123</p>
-           </div>
-       </div>
-       <div class="similar-video">
-           <img src="{% static 'images/foto.jpg' %}" alt="similar video" width="100%">
-           <p>Zobacz jak to zrobić</p>
-           <div class="similar-video-author">
-               <img src="{% static 'images/avatar.png' %}" class="avatar-similar-video">
-               <p>Autor 123</p>
-           </div>
-       </div>
-       <div class="similar-video">
-           <img src="{% static 'images/foto.jpg' %}" alt="similar video" width="100%">
-           <p>Zobacz jak to zrobić</p>
-           <div class="similar-video-author">
-               <img src="{% static 'images/avatar.png' %}" class="avatar-similar-video">
-               <p>Autor 123</p>
-           </div>
-       </div>
-</div>
-
-</div>
+   <div class="sidebar">
+        <h2>Podobne Filmy</h2>
+        {% for sidebar_video in sidebar_videos %}
+            <div class="similar-video">
+                <a href="{{ sidebar_video.get_absolute_url }}"><img src="{{ sidebar_video.thumbnail.url }}" width="100%"></a>
+                <div class="similar-video-info">
+                    <div>
+                        <p>{{ sidebar_video.title }}</p>
+                    </div>
+                    <div class="author-info">
+                        <img src="{{ sidebar_video.author.avatar.url }}" width="50px">
+                        <p>{{ sidebar_video.author.username }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
 {% endblock content %}
+{#       <div class="similar-video">#}
+{#           <img src="{% static 'images/foto.jpg' %}" alt="similar video" width="100%">#}
+{#           <p>Zobacz jak to zrobić</p>#}
+{#           <div class="similar-video-author">#}
+{#               <img src="{% static 'images/avatar.png' %}" class="avatar-similar-video">#}
+{#               <p>Autor 123</p>#}
+{#           </div>#}
+{#       </div>#}
+{#       <div class="similar-video">#}
+{#           <img src="{% static 'images/foto.jpg' %}" alt="similar video" width="100%">#}
+{#           <p>Zobacz jak to zrobić</p>#}
+{#           <div class="similar-video-author">#}
+{#               <img src="{% static 'images/avatar.png' %}" class="avatar-similar-video">#}
+{#               <p>Autor 123</p>#}
+{#           </div>#}
+{#       </div>#}
+{#       <div class="similar-video">#}
+{#           <img src="{% static 'images/foto.jpg' %}" alt="similar video" width="100%">#}
+{#           <p>Zobacz jak to zrobić</p>#}
+{#           <div class="similar-video-author">#}
+{#               <img src="{% static 'images/avatar.png' %}" class="avatar-similar-video">#}
+{#               <p>Autor 123</p>#}
+{#           </div>#}
+{#       </div>#}
+{#       <div class="similar-video">#}
+{#           <img src="{% static 'images/foto.jpg' %}" alt="similar video" width="100%">#}
+{#           <p>Zobacz jak to zrobić</p>#}
+{#           <div class="similar-video-author">#}
+{#               <img src="{% static 'images/avatar.png' %}" class="avatar-similar-video">#}
+{#               <p>Autor 123</p>#}
+{#           </div>#}
+{#       </div>#}
+{#</div>#}
+

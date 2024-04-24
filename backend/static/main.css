@@ -240,13 +240,6 @@ input[type="search"]:focus {
     background-color: #55BAE7;
 
 }
-.similar-videos{
-    background-color: #e53453;
-    width: 20%;
-    padding: 5px;
-    margin-right: 3em;
-    margin-left: 3em;
-}
 
 .video-detail {
     display: flex;
@@ -362,24 +355,6 @@ input[type="search"]:focus {
     text-autospace: punctuation;
     text-align: justify;
 }
-.similar-video{
-    padding: 5px;
-    font-size: 20px;
-}
-.similar-video-author{
-    font-weight: bolder;
-    display: flex;
-    flex-direction: row;
-    font-size: 18px;
-    position: relative;
-    bottom: 12px;
-
-}
-.avatar-similar-video{
-    width: 25px;
-    height: 25px;
-}
-
 .div-filtr{
     background-color: #E63453;
     margin: 0;
