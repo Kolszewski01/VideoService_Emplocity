@@ -41,6 +41,7 @@ body {
     justify-content: right;
     margin-right: 3%;
 }
+
 .search-container{
     width: 40%;
     display: flex;
@@ -73,6 +74,7 @@ input[type="search"]:focus {
     background-position: center;
     border-radius: 20px;
     margin-left: -33px;
+    margin-top: 3px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -105,6 +107,7 @@ input[type="search"]:focus {
     border: none;
     border-radius: 50%;
     cursor: pointer;
+    margin-right: 15px;
 }
 
 .container{
@@ -197,7 +200,22 @@ input[type="search"]:focus {
     border-radius: 5px;
     box-shadow: 3px 3px 4px 2px #34728d;
 }
+.logout {
+    display: inherit;
+    padding: 5px 12px 5px 5px;
+    background-color: #55b9e6;
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 15px;
+    transition: background-color 0.3s ease;
+}
 
+.logout:hover {
+    background-color: #e53453;
+    text-decoration: none;
+    color: #fdfdfd;
+}
 .avatar_user_videos {
     height: 50px;
     border-radius: 50%;
@@ -316,8 +334,8 @@ input[type="search"]:focus {
     border: none;
     padding: 0;
     cursor: pointer;
-    color: #fdfdfd; /* Domyślnie biały kolor tekstu */
-    transition: color 0.3s ease; /* Płynna zmiana koloru */
+    color: #fdfdfd;
+    transition: color 0.3s ease;
 }
 .like-button[data-like="true"] {
     color: #55BAE7;
@@ -419,4 +437,37 @@ input[type="search"]:focus {
     border-radius: 4px;
     transition: background-color 0.3s ease;
     margin-left: 5px;
+}
+.form-control {
+    border-radius: 1rem;
+}
+.avatar-container {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-list {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    display: none;
+    z-index: 1;
+    width: 240%;
+}
+
+.dropdown-list a {
+    display: block;
+    padding: 8px 0;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-list a:hover {
+    background-color: #f0f0f0;
 }

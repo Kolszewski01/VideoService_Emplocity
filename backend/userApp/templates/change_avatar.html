@@ -1,10 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Change Avatar</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
+    <div class="container-avatar">
+        <h2>Change Avatar</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" accept="image/*" id="avatar-input" name="avatar">
+            <label for="avatar-input">
+                <img class="avatar-select" id="avatar-preview" src="{% if user.avatar %}{{ user.avatar.url }}{% else %}placeholder_image.jpg{% endif %}" alt="Avatar">
+                Wybierz obrazek
+            </label>
+            <button type="submit">Zapisz</button>
+        </form>
+    </div>
 {% endblock %}

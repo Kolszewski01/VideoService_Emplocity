@@ -7,6 +7,7 @@
     <title>{% block title %}Strona główna{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'main.css'%}">
+
 </head>
 <body>
     <nav class="nav-bar">
@@ -31,7 +32,6 @@
                 {% if user.is_authenticated %}
                         <form action="{% url 'logout' %}" method="post">
                             {% csrf_token %}
-                            <!-- To jest przycisk avatr ktory wylogowuje, zamienic avatar pod user, rozwinać liste a nie wylogowywac -->
                             <button type="submit" class="account-button"></button>
                         </form>
                 {% else %}
