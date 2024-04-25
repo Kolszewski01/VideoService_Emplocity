@@ -45,9 +45,8 @@ a{
     visibility: hidden;
 }
 
-h2{
-    max-width: 100%; /* Maksymalna szerokość */
-    margin-left: 20%; /* Automatyczne ustawienie marginesów poziomych, aby wyśrodkować */
-     /* Automatyczne ustawienie marginesów poziomych, aby wyśrodkować */
+h2 {
+    max-width: 100%;
+    margin-left: 20%;
 }
 
