@@ -1,0 +1,48 @@
+.liked-videos-container{
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #55BAE7;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Cień */
+    color: #fdfdfd;
+}
+.user-info-liked-videos{
+    display: flex;
+    background-color: #418eb0;
+    border-radius: 15px 15px 0px 0px;
+    padding: 5px;
+}
+.liked-videos{
+    width: 100%;
+}
+.under-video-liked{
+    background-color: #418eb0;
+    border-radius: 0px 0px 15px 15px;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+.reflink {
+    text-decoration: none;
+    color: inherit;
+    font-size: 26px;
+}
+.reflink:hover{
+    text-decoration: none;
+    color: #fdfdfd;
+}
+.avatr-user-liked-videos{
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+    border-radius: 50%;
+    margin-top: 16px;
+}
+.author-liked-videos{
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 18px;
+    margin-left: 5px;
+}

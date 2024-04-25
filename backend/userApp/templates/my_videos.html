@@ -2,13 +2,16 @@
 
 
 {% block content %}
-    <h1>Moje filmy</h1>
-    <ul>
-        {% for video in user_videos %}
-            <li>
-                <a href="{{ video.get_absolute_url }}">{{ video.title }}</a>
-                <img src="{{ video.thumbnail.url }}" alt="{{ video.title }}">
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="my-videos-container">
+        <h1>Moje filmy</h1>
+            {% for video in user_videos %}
+                <div class="my-video-once">
+                    <a href="{{ video.get_absolute_url }}">
+                        <img class="my-video" src="{{ video.thumbnail.url }}" alt="{{ video.title }}">
+                    </a>
+                <a class="reflink" href="{{ video.get_absolute_url }}">{{ video.title }}</a>
+
+                </div>
+            {% endfor %}
+    </div>
 {% endblock %}

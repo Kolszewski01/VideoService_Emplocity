@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'main.css'%}">
     <link rel="stylesheet" href="{% static 'video-detail.css'%}">
+    <link rel="stylesheet" href={% static 'change_avatar.css'%}>
+    <link rel="stylesheet" href={% static 'liked_videos.css'%}>
+    <link rel="stylesheet" href={% static 'my_videos.css'%}>
 <style>
     .dropdown-list {
         position: absolute;
@@ -42,28 +45,27 @@
         >
         <button class="search-button" type="submit" href="{% url 'search_feature' %}"></button>
     </form>
-    <div class="login">
-        {% if user.is_authenticated %}
-            <button class="btt account-button" style="background-image: url('{{ user.avatar.url }}')" onclick="toggleDropdown()"></button>
-                <select id="dropdownList" class="dropdown-list" onchange="if (this.value) window.location.href=this.value">
-                    <option selected disabled>Wybierz akcję</option>
-                    <option value="{% url 'upload_video' %}">Wrzuć film</option>
-                    <option value="{% url 'change_avatar' %}">Zmień avatar</option>
-                    <option value="{% url 'my_videos' %}">Twoje Filmy</option>
-                    <option value="{% url 'liked_videos' %}">Polubione filmy</option>
-
-                </select>
-                <form action="{% url 'logout' %}" method="post">
-                    {% csrf_token %}
-                    <!-- To jest przycisk avatr ktory wylogowuje, zamienic avatar pod user, rozwinać liste a nie wylogowywac -->
-                    <button type="submit" > Wyloguj </button>
-                </form>
-        {% else %}
-            <a href="{% url 'login' %}" class="login-button">
-                <span class="ml-2">Zaloguj</span>
-            </a>
-        {% endif %}
-    </div>
+<div class="login">
+    {% if user.is_authenticated %}
+        <div class="avatar-container" onclick="toggleDropdown()">
+            <button class="btt account-button" style="background-image: url('{{ user.avatar.url }}')"></button>
+            <div id="dropdownList" class="dropdown-list" style="display: none;">
+                <a href="{% url 'upload_video' %}">Wrzuć film</a>
+                <a href="{% url 'change_avatar' %}">Zmień avatar</a>
+                <a href="{% url 'my_videos' %}">Twoje Filmy</a>
+                <a href="{% url 'liked_videos' %}">Polubione filmy</a>
+            </div>
+        </div>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="logout" type="submit">Wyloguj</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}" class="login-button">
+            <span class="ml-2">Zaloguj</span>
+        </a>
+    {% endif %}
+</div>
 </nav>
 
 {% block content %}
@@ -85,6 +87,14 @@
     function toggleDropdown() {
         const dropdownList = document.getElementById('dropdownList');
         dropdownList.classList.toggle('active');
+    }
+        document.addEventListener("DOMContentLoaded", function() {
+        var dropdownList = document.getElementById("dropdownList");
+        dropdownList.style.display = "block";
+    });
+    function toggleDropdown() {
+        var dropdownList = document.getElementById("dropdownList");
+        dropdownList.style.display = dropdownList.style.display === "block" ? "none" : "block";
     }
 </script>
 </body>
