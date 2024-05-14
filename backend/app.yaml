@@ -1,0 +1,15 @@
+runtime: python39
+service: default
+env: flex
+
+runtime_config:
+  python_version: 3
+
+env_variables:
+  DB_HOST: '34.116.139.232'
+  DB_NAME: 'postgres'
+  DB_USER: 'postgres'
+  DB_PASSWORD: 'zaq1@WSX'
+
+manual_scaling:
+  instances: 1

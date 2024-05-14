@@ -1,49 +1,30 @@
 version: '3.8'
+
 services:
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile
-    command: python /backend/manage.py runserver 0.0.0.0:8000
-    volumes:
-      - ./backend:/backend
-      - videos:/vol/web/media
+      context: .
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
     ports:
       - 8000:8000
+    volumes:
+      - ./backend:/backend
+      - ./data/web:/vol/web
     environment:
+      - SECRET_KEY=devsecretkey
+      - DEBUG=1
       - DB_HOST=db
       - DB_NAME=app
       - DB_USER=postgres
-      - DB_PASSWORD=pass
+      - DB_PASS=pass
     depends_on:
       - db
 
-#  frontend:
-#    build:
-#      context: ./frontend
-#      dockerfile: Dockerfile
-#    volumes:
-#      - ./frontend:/frontend
-#    ports:
-#      - 3000:3000
-#    environment:
-#      - CHOKIDAR_USEPOLLING=true
-#      - CHOKIDAR_INTERVAL=100
-#    stdin_open: true
-#    tty: true
-
   db:
-    image: postgres:16.0-alpine3.18
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+    image: postgres:13-alpine
     environment:
       - POSTGRES_DB=app
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=pass
-      - POSTGRES_EXTENSIONS=postgis,postgis_topology
-
-volumes:
-  videos:
-  postgres_data:

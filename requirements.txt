@@ -1,4 +1,4 @@
-Django==5.0.2
+Django==4.2.13
 djangorestframework
 django-storages
 Pillow
@@ -12,3 +12,5 @@ six
 django-taggit
 moviepy
 django-payments-payu==1.4.0
+uWSGI>=2.0.19,<2.1
+

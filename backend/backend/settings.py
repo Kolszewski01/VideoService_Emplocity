@@ -23,13 +23,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-%mft+3yu+=mhvbn2@xf%&n9x=b6ds0-5(51q46j92oo)5f%bcn'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'changeme')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(int(os.environ.get('DEBUG', 0)))
 
-ALLOWED_HOSTS: List[str] = ['13da-88-156-14-190.ngrok-free.app','localhost','secure.snd.payu.com']
+ALLOWED_HOSTS: List[str] = ['13da-88-156-14-190.ngrok-free.app','localhost','secure.snd.payu.com', 'zbombynaekran.azurewebsites.net']
 
+ALLOWED_HOSTS_ENV = os.environ.get('ALLOWED_HOSTS')
+if ALLOWED_HOSTS_ENV:
+    ALLOWED_HOSTS.extend(ALLOWED_HOSTS_ENV.split(','))
 CSRF_TRUSTED_ORIGINS = ['https://*.ngrok-free.app','https://secure.snd.payu.com']
 
 
@@ -100,7 +103,6 @@ DATABASES = {
     }
 }
 
-
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 # Password validation
@@ -137,11 +139,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/static/'
+STATIC_ROOT = 'vol/web/static'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-
+MEDIA_URL = '/static/media/'
+MEDIA_ROOT = '/vol/web/media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -166,8 +170,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-
-MEDIA_ROOT = '/var/lib/docker/volumes/videos/_data'
-MEDIA_URL = '/media/'
 
 

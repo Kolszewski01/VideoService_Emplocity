@@ -7,7 +7,7 @@
     <form method="post" action="{% url 'login' %}">
       {% csrf_token %}
       {{ form.as_p }}
-      <input type="hidden" name="next" value="{% url 'home' %}" />
+      <input type="hidden" name="next" value="{% url 'all_videos' %}" />
       <button type="submit" class="submit-button">Zaloguj się</button>
     </form>
     <p class="mt-3">

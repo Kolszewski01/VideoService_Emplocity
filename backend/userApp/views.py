@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from .forms import MyUserRegistrationForm, AvatarChangeForm
-from django.urls import reverse_lazy
 from django.contrib.auth.views import LogoutView as DefaultLogoutView
 from .tokens import account_activation_token
 from django.core.mail import send_mail
