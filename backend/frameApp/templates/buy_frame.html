@@ -1,3 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -5,17 +14,30 @@
     <title>Dostępne ramki</title>
 </head>
 <body>
-    <h1>Dostępne ramki</h1>
+<div class="div-tytul">
+    <h1 class="tytul-text">Dostępne ramki</h1>
+</div>
+
     {% for frame in frames %}
-    <div>
-        <h2>{{ frame.frame_name }}</h2>
-        <img src="{{ frame.frame_url.url }}" alt="Obrazek ramki" style="max-width: 300px;"/>
-        <p>Cena: {{ frame.price }} PLN</p>
-        <form action="{% url 'buy_frame' frame.id %}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="buy-now-button">Kup teraz</button>
-        </form>
+    <div class="div-item">
+        <h2 class="h2-item">{{ frame.frame_name }}</h2>
+        <table>
+            <tr>
+              <td> <img src="{{ frame.frame_url.url }}" alt="Obrazek ramki" style="max-width: 300px;"/>
+              </td>
+              <td style="padding-left: 10px"> <p>Cena: {{ frame.price }} PLN</p>
+               <form action="{% url 'buy_frame' frame.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="buy-now-button">Kup teraz</button>
+                </form>
+              </td>
+            </tr>
+
+        </table>
+
     </div>
     {% endfor %}
 </body>
 </html>
+
+{% endblock %}

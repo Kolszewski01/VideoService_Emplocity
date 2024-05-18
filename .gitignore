@@ -1,7 +1,7 @@
 
 **/migrations/
 !*/migrations/__init__.py
-email_config.py
+backend/backend/email_config.py
 .env
 .idea/
 

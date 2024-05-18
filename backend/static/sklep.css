@@ -1,0 +1,21 @@
+.div-tytul{
+    padding: 3px;
+    background-color: #55b9e6;
+    width: 100%;
+}
+
+.tytul-text{
+    color: white;
+    margin-left: 5%;
+
+
+}
+
+.div-item{
+    margin-left: 5%;
+    margin-top: 10px;
+}
+
+.h2-item{
+    margin-left: 0;
+}

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href={% static 'change-avatar.css'%}>
     <link rel="stylesheet" href={% static 'liked_videos.css'%}>
     <link rel="stylesheet" href={% static 'my_videos.css'%}>
+    <link rel="stylesheet" href={% static 'sklep.css'%}>
 <style>
     .dropdown-list {
         position: absolute;
@@ -52,7 +53,7 @@
             <div id="dropdownList" class="dropdown-list" style="display: none;">
                 <a href="{% url 'upload_video' %}">Wrzuć film</a>
                 <a href="{% url 'change_avatar' %}">Zmień avatar</a>
-                <a href="{% url 'my_videos' %}">Twoje Filmy</a>
+                <a href="{% url 'my_videos' %}">Moje filmy</a>
                 <a href="{% url 'liked_videos' %}">Polubione filmy</a>
             </div>
         </div>

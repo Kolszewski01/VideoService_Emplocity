@@ -5,43 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86386dd5-433f-4b21-baf8-b9da63a47a99" name="Changes" comment="Poprawienie błędu wyświetlania się listy rozwijanej wyrzucenie styli changeavatar.css usunięcie styli podstrony chacnge avatar przez konflikty z innymi podstronami">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/app.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/static/sklep.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/like_dislikeApp/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/like_dislikeApp/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/like_dislikeApp/migrations/0002_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/like_dislikeApp/migrations/0003_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/static/change-avatar.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/static/change-avatar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frameApp/migrations/0002_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frameApp/templates/buy_frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/frameApp/templates/buy_frame.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/userApp/templates/change_avatar.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/userApp/templates/change_avatar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/userApp/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/userApp/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/userApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/userApp/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/reportWebVitals.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/server.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/setupTests.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +20,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Script" />
         <option value="CSS File" />
       </list>
     </option>
@@ -77,6 +47,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;Dev]-1]-Hosting-aplikacji&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Hp/Documents/GitHub/emplocity/VideoService_Emplocity&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -88,9 +59,19 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Hp\Documents\GitHub\emplocity\VideoService_Emplocity\backend\backend" />
+      <recent name="C:\Users\Hp\Documents\GitHub\emplocity\VideoService_Emplocity\backend" />
+      <recent name="C:\Users\Hp\Documents\GitHub\emplocity\VideoService_Emplocity" />
       <recent name="C:\projekt\VideoService_Emplocity" />
       <recent name="C:\projekt\VideoService_Emplocity\backend" />
     </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-50da183f06c8-2887949eec09-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.13135.95" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -108,6 +89,8 @@
       <workItem from="1715520903097" duration="12914000" />
       <workItem from="1715635503508" duration="1154000" />
       <workItem from="1715689807317" duration="10270000" />
+      <workItem from="1715809592692" duration="3958000" />
+      <workItem from="1716032072975" duration="1004000" />
     </task>
     <task id="LOCAL-00001" summary="Poprawienie błędu wyświetlania się listy rozwijanej wyrzucenie styli changeavatar.css usunięcie styli podstrony chacnge avatar przez konflikty z innymi podstronami">
       <option name="closed" value="true" />
@@ -135,6 +118,13 @@
                     <value>
                       <list>
                         <option value="FE]10]Formularz-Dodawania-Filmu-" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="text">
+                    <value>
+                      <list>
+                        <option value="skl" />
                       </list>
                     </value>
                   </entry>
