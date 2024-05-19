@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86386dd5-433f-4b21-baf8-b9da63a47a99" name="Changes" comment="Poprawienie błędu wyświetlania się listy rozwijanej wyrzucenie styli changeavatar.css usunięcie styli podstrony chacnge avatar przez konflikty z innymi podstronami">
-      <change afterPath="$PROJECT_DIR$/backend/static/sklep.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/frameApp/migrations/0002_initial.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/frameApp/templates/buy_frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/frameApp/templates/buy_frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/static/sklep.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/static/sklep.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +88,8 @@
       <workItem from="1715689807317" duration="10270000" />
       <workItem from="1715809592692" duration="3958000" />
       <workItem from="1716032072975" duration="1004000" />
+      <workItem from="1716136055074" duration="17000" />
+      <workItem from="1716136083544" duration="7360000" />
     </task>
     <task id="LOCAL-00001" summary="Poprawienie błędu wyświetlania się listy rozwijanej wyrzucenie styli changeavatar.css usunięcie styli podstrony chacnge avatar przez konflikty z innymi podstronami">
       <option name="closed" value="true" />

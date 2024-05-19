@@ -1,43 +1,171 @@
+{#{% extends "base.html" %}#}
+{#{% load static %}#}
+{##}
+{##}
+{#{% block content %}#}
+{#    #}
+{#<!DOCTYPE html>#}
+{#<html lang="pl">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Dostępne ramki</title>#}
+{#</head>#}
+{#<body>#}
+{#<div class="div-tytul" >#}
+{#    <h1 class="tytul-text">Dostępne ramki</h1>#}
+{#</div>#}
+{##}
+{#    {% for frame in frames %}#}
+{#    <div class="div-item">#}
+{#        <h2 class="h2-item">{{ frame.frame_name }}</h2>#}
+{#        <div class = "item-content">#}
+{#            <img src="{{ frame.frame_url.url }}" alt="Obrazek ramki" style="max-width: 300px;"/>#}
+{#            <div class="item-details">#}
+{#               <p>Cena: {{ frame.price }} PLN</p>#}
+{#               <form action="{% url 'buy_frame' frame.id %}" method="post">#}
+{#                    {% csrf_token %}#}
+{#                    <button type="submit" class="buy-now-button">Kup teraz</button>#}
+{#               </form>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#    </div>#}
+{#    {% endfor %}#}
+{#</body>#}
+{#</html>#}
+{##}
+{#{% endblock %}#}
+{##}
+
 {% extends "base.html" %}
 {% load static %}
 
-
 {% block content %}
-
-
-
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <title>Dostępne ramki</title>
+    <style>
+        .div-tytul {
+            padding: 3px;
+            background-color: #55b9e6;
+            display: flex;
+            justify-content: center;
+        }
+
+        .tytul-text {
+            color: white;
+
+
+        }
+
+        .frames-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            padding: 10px;
+            margin: 5px;
+        }
+
+        .div-item {
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 5px;
+            flex-basis: 30%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            margin-left: 2%;
+            background: #e53453;
+        }
+
+        .h2-item {
+            margin: 0 0 10px 0;
+            text-align: center;
+        }
+
+        .item-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .item-content img {
+            width: 90%;
+            height: 370px;
+            object-fit: cover;
+            border: 2px solid #3a8aae;
+            border-radius: 15px;
+        }
+
+        .item-details {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .buy-now-button {
+            background-color: #55b9e6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .buy-now-button:hover {
+            background-color: #1f8dbf;
+        }
+
+        @media (max-width: 900px) {
+            .div-item {
+                flex-basis: 45%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .div-item {
+                flex-basis: 100%;
+            }
+
+            .item-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .item-details {
+                padding-left: 0;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="div-tytul">
     <h1 class="tytul-text">Dostępne ramki</h1>
 </div>
 
+<div class="frames-container">
     {% for frame in frames %}
-    <div class="div-item">
-        <h2 class="h2-item">{{ frame.frame_name }}</h2>
-        <table>
-            <tr>
-              <td> <img src="{{ frame.frame_url.url }}" alt="Obrazek ramki" style="max-width: 300px;"/>
-              </td>
-              <td style="padding-left: 10px"> <p>Cena: {{ frame.price }} PLN</p>
-               <form action="{% url 'buy_frame' frame.id %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="buy-now-button">Kup teraz</button>
-                </form>
-              </td>
-            </tr>
-
-        </table>
-
-    </div>
+        <div class="div-item">
+            <h2 class="h2-item">{{ frame.frame_name }}</h2>
+            <div class="item-content">
+                <img src="{{ frame.frame_url.url }}" alt="Obrazek ramki"/>
+                <div class="item-details">
+                    <p>Cena: {{ frame.price }} PLN</p>
+                    <form action="{% url 'buy_frame' frame.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="buy-now-button">Kup teraz </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     {% endfor %}
+</div>
+
 </body>
 </html>
-
 {% endblock %}
