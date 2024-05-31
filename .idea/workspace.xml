@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86386dd5-433f-4b21-baf8-b9da63a47a99" name="Changes" comment="Poprawienie błędu wyświetlania się listy rozwijanej wyrzucenie styli changeavatar.css usunięcie styli podstrony chacnge avatar przez konflikty z innymi podstronami">
+      <change afterPath="$PROJECT_DIR$/backend/static/images/icon-add.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/static/reset-hasla.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/frameApp/templates/buy_frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/frameApp/templates/buy_frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/static/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/static/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/static/my_videos.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/static/my_videos.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/static/sklep.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/static/sklep.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/userApp/templates/password_reset_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/userApp/templates/password_reset_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/userApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/userApp/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,11 +63,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Hp\Documents\GitHub\emplocity\VideoService_Emplocity\backend\static\images" />
       <recent name="C:\Users\Hp\Documents\GitHub\emplocity\VideoService_Emplocity\backend\backend" />
       <recent name="C:\Users\Hp\Documents\GitHub\emplocity\VideoService_Emplocity\backend" />
       <recent name="C:\Users\Hp\Documents\GitHub\emplocity\VideoService_Emplocity" />
       <recent name="C:\projekt\VideoService_Emplocity" />
-      <recent name="C:\projekt\VideoService_Emplocity\backend" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -90,6 +97,8 @@
       <workItem from="1716032072975" duration="1004000" />
       <workItem from="1716136055074" duration="17000" />
       <workItem from="1716136083544" duration="7360000" />
+      <workItem from="1717080668499" duration="5494000" />
+      <workItem from="1717157662803" duration="6845000" />
     </task>
     <task id="LOCAL-00001" summary="Poprawienie błędu wyświetlania się listy rozwijanej wyrzucenie styli changeavatar.css usunięcie styli podstrony chacnge avatar przez konflikty z innymi podstronami">
       <option name="closed" value="true" />
@@ -106,6 +115,21 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="fe]11]Widok-resetowania-hasla" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
@@ -116,14 +140,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="FE]10]Formularz-Dodawania-Filmu-" />
-                      </list>
-                    </value>
-                  </entry>
-                  <entry key="text">
-                    <value>
-                      <list>
-                        <option value="skl" />
+                        <option value="fe]11]Widok-resetowania-hasla" />
                       </list>
                     </value>
                   </entry>
