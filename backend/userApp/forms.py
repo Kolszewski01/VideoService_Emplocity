@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 from .models import MyUser
+from frameApp.models import Frame, UserFrame
 
 
 User = get_user_model()
@@ -25,15 +26,25 @@ class MyUserRegistrationForm(UserCreationForm):
 
 class AvatarChangeForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = MyUser
         fields = ['avatar']
 
     def clean_avatar(self):
         avatar = self.cleaned_data['avatar']
         if avatar:
             if avatar.name.endswith('.gif'):
-                raise ValidationError("Nie możesz ustwaić gifu na avatar. Mozesz jedynie kupić ;)")
+                raise ValidationError("Nie możesz ustwaić gifu na avatar. Możesz jedynie kupić ;)")
         return avatar
+
+
+class SelectAvatarForm(forms.Form):
+    frame = forms.ModelChoiceField(queryset=Frame.objects.none(), label="Wybierz zakupiony awatar")
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+        if user:
+            self.fields['frame'].queryset = Frame.objects.filter(userframe__user=user)
 
 
 class CustomUserCreationForm(UserCreationForm):

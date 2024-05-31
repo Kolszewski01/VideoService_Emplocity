@@ -3,18 +3,49 @@
 
 
 {% block content %}
+  <h2>Zmiana awatara</h2>
 
-<div class="container-avatar">
-    <div class="avatar-form">
-        <h2>Change Avatar</h2>
-        <form method="post" enctype="multipart/form-data" style="background-image: url('{{ user.avatar.url }}');
-                background-size:10%; background-repeat: no-repeat,repeat; background-position-x: 30% ;
-                background-position-y: 5%" >
-            {% csrf_token %}
-            {{ form.as_p }}
+  <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" name="upload_avatar">Zmień awatar</button>
+  </form>
 
-            <button class = "avatar-button" type="submit">Save</button>
-        </form>
-    </div>
-</div>
+  <h2>Wybierz zakupiony awatar</h2>
+
+  <form id="select-avatar-form" method="post">
+      {% csrf_token %}
+      <div id="avatar-selection">
+          {% for user_frame in user_frames %}
+              <img src="{{ user_frame.frame.frame_url.url }}" alt="{{ user_frame.frame.frame_name }}" data-frame-id="{{ user_frame.frame.id }}" class="selectable-avatar" width="100">
+          {% endfor %}
+      </div>
+      <input type="hidden" name="frame_id" id="selected-frame-id">
+      <button type="submit" name="select_avatar">Zatwierdź</button>
+  </form>
+
+  <style>
+      .selectable-avatar {
+          border: 2px solid transparent;
+          cursor: pointer;
+      }
+      .selected-avatar {
+          border: 2px solid blue;
+      }
+  </style>
+
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const avatars = document.querySelectorAll('.selectable-avatar');
+          const hiddenInput = document.getElementById('selected-frame-id');
+
+          avatars.forEach(avatar => {
+              avatar.addEventListener('click', function() {
+                  avatars.forEach(av => av.classList.remove('selected-avatar'));
+                  this.classList.add('selected-avatar');
+                  hiddenInput.value = this.getAttribute('data-frame-id');
+              });
+          });
+      });
+  </script>
 {% endblock %}

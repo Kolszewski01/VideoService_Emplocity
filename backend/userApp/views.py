@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import MyUserRegistrationForm, AvatarChangeForm
+from .forms import MyUserRegistrationForm, AvatarChangeForm, SelectAvatarForm
 from django.contrib.auth.views import LogoutView as DefaultLogoutView
 from .tokens import account_activation_token
 from django.core.mail import send_mail
@@ -15,6 +15,8 @@ from video.models import Video
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
+from frameApp.models import Frame, UserFrame
+from django.http import HttpResponse
 
 
 def register(request):
@@ -54,10 +56,17 @@ def activate_account(request, uidb64, token):
     else:
         return render(request, 'activation_invalid.html')
 
-class ChangeAvatarView(FormView):
+class ChangeAvatarView(LoginRequiredMixin, FormView):
     template_name = 'change_avatar.html'
     form_class = AvatarChangeForm
     success_url = reverse_lazy('all_videos')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        user_frames = UserFrame.objects.filter(user=user)
+        context['user_frames'] = user_frames
+        return context
 
     def form_valid(self, form):
         form.save()
@@ -67,6 +76,26 @@ class ChangeAvatarView(FormView):
         kwargs = super().get_form_kwargs()
         kwargs['instance'] = self.request.user
         return kwargs
+
+    def post(self, request, *args, **kwargs):
+        if 'upload_avatar' in request.POST:
+            return super().post(request, *args, **kwargs)
+        elif 'select_avatar' in request.POST:
+            return self.select_avatar(request)
+        return HttpResponse(status=400)
+
+    def select_avatar(self, request):
+        frame_id = request.POST.get('frame_id')
+        if frame_id:
+            try:
+                frame = Frame.objects.get(id=frame_id)
+                user = request.user
+                user.avatar = frame.frame_url
+                user.save()
+                return redirect(self.success_url)
+            except Frame.DoesNotExist:
+                return HttpResponse("Wybrany awatar nie istnieje.", status=404)
+        return HttpResponse("Niepoprawne żądanie.", status=400)
 
 class LogoutView(DefaultLogoutView):
     next_page = reverse_lazy('main')

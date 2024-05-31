@@ -52,6 +52,7 @@
             <button class="btt account-button" style="background-image: url('{{ user.avatar.url }}')"></button>
             <div id="dropdownList" class="dropdown-list" style="display: none;">
                 <a href="{% url 'upload_video' %}">Wrzuć film</a>
+                <a href="{% url 'gif_list' %}">Kup awatar</a>
                 <a href="{% url 'change_avatar' %}">Zmień avatar</a>
                 <a href="{% url 'my_videos' %}">Moje filmy</a>
                 <a href="{% url 'liked_videos' %}">Polubione filmy</a>

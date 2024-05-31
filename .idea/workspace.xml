@@ -6,8 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="86386dd5-433f-4b21-baf8-b9da63a47a99" name="Changes" comment="Poprawienie błędu wyświetlania się listy rozwijanej wyrzucenie styli changeavatar.css usunięcie styli podstrony chacnge avatar przez konflikty z innymi podstronami">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/frameApp/templates/buy_frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/frameApp/templates/buy_frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/static/sklep.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/static/sklep.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frameApp/payu.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/frameApp/payu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frameApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/frameApp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/userApp/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/userApp/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/userApp/templates/change_avatar.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/userApp/templates/change_avatar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/userApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/userApp/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,23 +41,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Python.settings.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Dev]-1]-Hosting-aplikacji&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Hp/Documents/GitHub/emplocity/VideoService_Emplocity&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
+    "Python.settings.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Hp/Documents/GitHub/emplocity/VideoService_Emplocity",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Hp\Documents\GitHub\emplocity\VideoService_Emplocity\backend\backend" />

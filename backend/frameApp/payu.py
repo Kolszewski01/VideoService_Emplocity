@@ -5,7 +5,7 @@ import requests
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
-from .models import Frame
+from .models import Frame, UserFrame
 from userApp.models import MyUser
 
 PAYU_POS_ID = 478178
@@ -118,14 +118,21 @@ def payment_success(request):
         conn.close()
 
         if response_json['status']['statusCode'] == 'SUCCESS':
-            user.avatar = frame.frame_url
-            user.save()
-            del request.session['purchased_frame_id']
+            if response_json['status']['statusCode'] == 'SUCCESS':
+                if user.avatar:
+                    current_frame_url = user.avatar
+                    try:
+                        current_frame = Frame.objects.get(frame_url=current_frame_url)
+                        UserFrame.objects.create(user=user, frame=current_frame)
+                    except Frame.DoesNotExist:
+                        pass
 
-            return HttpResponse("Płatność została zakończona pomyślnie i avatar został zaktualizowany.")
+                user.avatar = frame.frame_url
+                user.save()
+                UserFrame.objects.create(user=user, frame=frame)
+                del request.session['purchased_frame_id']
 
-        else:
-            return HttpResponse("Płatność nieudana lub w trakcie realizacji.", status=400)
+                return HttpResponse("Płatność została zakończona pomyślnie i avatar został zaktualizowany.")
 
     except Frame.DoesNotExist:
         return HttpResponse("Ramka nie istnieje.", status=404)

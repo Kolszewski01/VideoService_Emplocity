@@ -26,5 +26,7 @@ class UserFrameDetail(RetrieveAPIView):
 
 
 def list_frames(request):
-    frames = Frame.objects.all()
+    user = request.user
+    purchased_frames_ids = UserFrame.objects.filter(user=user).values_list('frame_id', flat=True)
+    frames = Frame.objects.exclude(id__in=purchased_frames_ids)
     return render(request, 'buy_frame.html', {'frames': frames})
