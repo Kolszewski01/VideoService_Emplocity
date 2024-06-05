@@ -1,47 +1,50 @@
 .form{
-    width: 20%;
+    /*width: 20%;*/
     border-radius: 20px;
-    height: 200px;
+    height: fit-content;
     background-color: #55b9e6;
     padding: 20px;
-    justify-content: center;
+    justify-content: space-evenly;
     margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 45px;
 }
 
 .content_password-reset{
-    padding-top: 20px;
     justify-content: center;
-    width: 100%;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
     display: flex;
-    height: 100%;
+    height: 80vh;
+    width: 100vh;
+    margin: auto;
 }
 
 .form h2{
     margin: auto;
+    padding: 8px;
     font-palette: light ;
+    width: fit-content;
 }
 
 .form label{
     margin: auto;
-    padding: 3px;
+    padding: 8px;
 }
 
 .form input{
     border-radius: 10px;
     border-inline-color: #3a8aae;
     padding: 3px;
-
 }
 
 .form button{
     display: flex;
     margin-right: auto;
     margin-left: auto;
+    margin-top: auto;
     width: 100%;
     justify-content: center;
     background-color: #E63453;
