@@ -396,6 +396,7 @@ input[type="search"]:focus {
     border-right: #55BAE7;
     overflow: hidden;
     border-top: #007bff;
+    margin-bottom: 8px;
 }
 .filtr-lista:hover {
     content: '';
@@ -408,7 +409,8 @@ input[type="search"]:focus {
 }
 .form-filtr{
     padding-top: 5px;
-    padding-left: 30%;
+    display: flex;
+    justify-content: center;
 }
 
 .filtr-button{
@@ -419,6 +421,7 @@ input[type="search"]:focus {
     border-radius: 4px;
     transition: background-color 0.3s ease;
     margin-left: 5px;
+    margin-bottom: 8px;
 }
 .form-control {
     border-radius: 1rem;
