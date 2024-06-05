@@ -18,7 +18,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('', home, name='home'),
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='password_reset_form.html'), name='password_reset'),
-    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='send-link.html'), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('activate/<uidb64>/<token>/', activate_account, name='activate_account'),  # Poprawione
@@ -26,5 +26,4 @@ urlpatterns = [
     path('change-avatar/', ChangeAvatarView.as_view(), name='change_avatar'),
     path('my_videos/', MyVideosView.as_view(), name='my_videos'),
     path('liked_videos/', LikedVideosView.as_view(), name='liked_videos'),
-
 ]
