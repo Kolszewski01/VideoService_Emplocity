@@ -8,10 +8,10 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Frame, UserFrame
 from userApp.models import MyUser
 
-PAYU_POS_ID = 478178
-PAYU_SECOND_KEY = 'cef91e0035a7ee39b7702b5df63c0bdf'
-PAYU_CLIENT_ID = 478178
-PAYU_CLIENT_SECRET = 'bf42a37f3bfb9e4317f58d5840a04d02'
+PAYU_POS_ID = 480677
+PAYU_SECOND_KEY = '70878979fb8160fe529a7338475023d7'
+PAYU_CLIENT_ID = 480677
+PAYU_CLIENT_SECRET = 'c067f97671bc51e9550c887929b059d5'
 PAYU_AUTHORIZATION_URL = 'https://secure.snd.payu.com/pl/standard/user/oauth/authorize'
 PAYU_ORDER_URL = 'https://secure.snd.payu.com/api/v2_1/orders'
 PAYU_OAUTH_URL = 'https://secure.snd.payu.com/pl/standard/user/oauth/authorize'
@@ -41,7 +41,7 @@ def create_order(request, frame_id):
         access_token = token_data.get('access_token')
 
         order = json.dumps({
-            "notifyUrl": "https://13da-88-156-14-190.ngrok-free.app/frameApp/notify",
+            "notifyUrl": "http://zbombynaekrany/frameApp/notify",
             "customerIp": "123.123.123.123",
             "merchantPosId": PAYU_POS_ID,
             "description": "Zakup ramki",
