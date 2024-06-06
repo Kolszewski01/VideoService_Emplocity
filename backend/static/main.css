@@ -96,6 +96,23 @@ input[type="search"]:focus {
 .search-button:focus {
     background-color: #e53453;
 }
+.upload-button {
+    display: inline-block;
+    padding: 5px 12px;
+    background-color: #55b9e6;
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 15px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+.upload-button:hover {
+    background-color: #e53453;
+    text-decoration: none;
+    color: #fdfdfd;
+}
 .login-button, .logout {
     display: inline-block;
     padding: 5px 12px;

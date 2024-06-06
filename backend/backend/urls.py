@@ -20,6 +20,7 @@ from backend import views as main_views
 from django.conf.urls.static import static
 from django.conf import settings
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('frameApp/', include('frameApp.urls')),
@@ -27,6 +28,8 @@ urlpatterns = [
     path('video/', include('video.urls')),
     path('like_dislike/', include('like_dislikeApp.urls')),
     # path('', main_views.home, name='main'),
+    path('about-us/', main_views.about_us, name='about_us'),
+    path('rules/', main_views.rules, name='rules'),
     path('', include('video.urls'))
 
 ]

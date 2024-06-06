@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}O nas{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="about-content">
+        <p>
+           <h3>OpepO - Kim Jesteśmy?</h3>
+            Jesteśmy grupą pięciu studentów trzeciego roku informatyki, tworzących zespół OpepO. Każdy z nas specjalizuje się w innej dziedzinie, co pozwala nam realizować kompleksowe i innowacyjne projekty technologiczne. Oto nasz zespół:
+        <br>
+        <br>
+
+        <h5>Konrad Olszewski - Backend</h5>
+        Konrad odpowiada za logikę biznesową i serwery naszych aplikacji. Dzięki jego umiejętnościom backend działa sprawnie i niezawodnie.
+        <br>
+        <br>
+        <h5>Jakub Oleksiak - Frontend</h5>
+        Jakub zajmuje się tworzeniem interfejsów naszych aplikacji. Jego praca zapewnia, że nasze projekty są nie tylko funkcjonalne, ale i estetyczne oraz przyjazne użytkownikom.
+        <br>
+        <br>
+        <h5>Edyta Mejłun - UI/UX</h5>
+        Edyta projektuje doświadczenia użytkownika, dbając o to, aby nasze aplikacje były intuicyjne i łatwe w obsłudze. Jej celem jest tworzenie przejrzystych i atrakcyjnych interfejsów.
+        <br>
+        <br>
+        <h5>Arkadiusz Pelak - Bazy danych</h5>
+        Arkadiusz jest ekspertem od zarządzania danymi. Odpowiada za efektywne przechowywanie i szybki dostęp do informacji w naszych projektach.
+        <br>
+        <br>
+        <h5>Sebastian Pająk - Team Leader/Backend</h5>
+        Sebastian koordynuje pracę naszego zespołu i wspiera Konrada w zadaniach backendowych. Jako team leader, dba o to, abyśmy wspólnie osiągali wyznaczone cele, a każdy projekt był realizowany zgodnie z planem.
+        <br>
+        <br>
+        Nasza Misja
+        W OpepO dążymy do tworzenia nowatorskich rozwiązań technologicznych, które mają realny wpływ na otaczający nas świat. Łączymy nasze różnorodne talenty i umiejętności, aby wspólnie pokonywać wyzwania i stale się rozwijać.
+                </p>
+
+        <div id="photo-container">
+            <div class="admin-photo">
+                <img src="{% static 'images/oleks.jpg' %}" alt="">
+                <h1>Jakub Oleksiak</h1>
+            </div>
+            <div class="admin-photo">
+                <img src="{% static 'images/seba.jpg' %}" alt="">
+                <h1>Sebastian Pająk</h1>
+            </div>
+            <div class="admin-photo">
+                <img src="{% static 'images/edzia.jpg' %}" alt="">
+                <h1>Edyta Mejłun</h1>
+            </div>
+            <div class="admin-photo">
+                <img src="{% static 'images/arek.jpg' %}" alt="">
+                <h1>Arkadiusz Pelak</h1>
+            </div>
+            <div class="admin-photo">
+                <img src="{% static 'images/kondzio.jpg' %}" alt="">
+                <h1>Konrad Olszewski</h1>
+            </div>
+
+        </div>
+        <h1><i>Może i nie najtaniej ale za to jako tako</i></h1>
+    </div>
+</div>
+{% endblock %}
