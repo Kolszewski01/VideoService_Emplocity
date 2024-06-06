@@ -1,51 +1,120 @@
 .container-avatar{
-    display: flex;
+    /*display: flex;*/
     justify-content: center;
     align-items: center;
-    margin-top: 1%;
-    max-width: 50%;
-    min-width: 15%;
-    width: 30%;
-
+    /*margin: auto;*/
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    flex-basis: 25%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    margin-left: 2%;
+    border: 1px solid #55BAE7;
+    background-color: #55BAE7;
 }
 
 .avatar-form{
-
-    /*margin-top:10%;*/
     color: black;
+    padding: 35px;
     background-color: #55BAE7;
     border: 1px solid #55BAE7;
     border-radius: 20px;
-    padding: 7%;
-    display: flex;
     justify-content: center;
     flex-direction: column;
-    /*align-items: center;*/
-    max-width: 100%;
-    min-width: 60%;
-    width: 80%;
+    align-items: center;
+    display: flex;
+    width: 30vw;
     flex-wrap: wrap;
 }
+.avatar-form label{
+    visibility: hidden;
+}
 
-.avatar-button{
+.avatar-form h2{
+    margin: auto;
+    width: fit-content;
+    min-width: auto;
+}
+
+.avatar-form p{
+    margin: 30px;
+    width: 40px;
+}
+
+.avatar-form a{
+    visibility: hidden;
+}
+
+.avatar-form img{
+    width: 70px;
+    height: 70px;
+    border-radius: 90px;
+}
+
+
+.avatar-form button{
     display: flex;
-    width: 50%;
-    margin-left: 10%;
+    width: fit-content;
     justify-content: center;
     background-color: #E63453;
     border: 1px solid #E63453;
     border-radius: 20px;
+    margin: auto;
+}
+
+.avatar-form p{
+    width: 25vw;
 }
 
 .avatar-button:hover{
     background-color: #ee6779;
 }
 
-a{
+.avatar-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+
 }
 
-h2 {
-    max-width: 100%;
-    margin-left: 20%;
+.avatar-sklep{
+    color: black;
+    padding: 35px;
+    background-color: #55BAE7;
+    border: 1px solid #55BAE7;
+    border-radius: 20px;
+    justify-content: center;
+    /*flex-direction: column;*/
+    align-items: center;
+    /*display: flex;*/
+    /*width: 30vw;*/
+    flex-wrap: wrap;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 25%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    margin-left: 2%;
+}
+
+
+
+.avatar-sklep button{
+    display: flex;
+    width: fit-content;
+    justify-content: center;
+    background-color: #E63453;
+    border: 1px solid #E63453;
+    border-radius: 20px;
+    margin: auto;
+}
+
+.avatar-sklep button:hover{
+    background-color: #ee6779;
 }
 
