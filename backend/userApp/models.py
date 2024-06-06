@@ -19,7 +19,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
-    avatar = models.ImageField(upload_to='users/avatars', blank=True, null=True, default=default_avatar)
+    avatar = models.ImageField(upload_to='users/avatars', blank=True, null=True, default='avatar.png')
 
     objects = CustomUserManager()
 

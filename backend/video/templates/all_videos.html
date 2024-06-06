@@ -27,8 +27,12 @@
     {% for video in videos %}
     <div class="video-container">
         <div class="user-info">
-            <img src="{{ video.author.avatar.url }}" class="avatar_user_videos">
-            <p class="author">{{ video.author.username }}</p>
+        <img src="{% if video.author.avatar %}{{ video.author.avatar.url }}{% else %}{{ MEDIA_URL }}avatar.png{% endif %}" class="avatar_user_videos">
+            {% if video.author and video.author.username %}
+                {{ video.author.username }}
+            {% else %}
+                Anonimowy użytkownik
+            {% endif %}
         </div>
         <a href="{{ video.get_absolute_url }}">
             <img src="{{ video.thumbnail.url }}" width="720" height="480">

@@ -6,17 +6,6 @@
 {% block content %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    var videoId = '{{ video.url_path }}';
-
-    document.getElementById('shareLink').addEventListener('click', function(event) {
-        event.preventDefault();
-        var videoUrl = window.location.origin + '/videos/' + videoId + '/';
-        navigator.clipboard.writeText(videoUrl).then(function() {
-            alert('Link to this video has been copied to clipboard.');
-        }, function(err) {
-            console.error('Failed to copy link: ', err);
-        });
-    });
 
     var video = document.querySelector('.video-detail');
     var hasBeenCounted = false;
@@ -171,6 +160,38 @@ function showReplyForm(commentId) {
                 {% endfor %}
             </p>
         </div>
+            <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var videoId = '{{ video.url_path }}';
+        console.log('Video ID:', videoId); // Debug: wyświetl Video ID w konsoli
+
+        document.getElementById('shareLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            var videoUrl = window.location.origin + '/videos/' + videoId + '/';
+            console.log('Video URL:', videoUrl); // Debug: wyświetl Video URL w konsoli
+
+            // Tworzenie tymczasowego ukrytego pola tekstowego
+            var tempInput = document.createElement('input');
+            tempInput.style.position = 'absolute';
+            tempInput.style.left = '-1000px';
+            tempInput.style.top = '-1000px';
+            tempInput.value = videoUrl;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+
+            // Kopiowanie wartości do schowka
+            try {
+                document.execCommand('copy');
+                alert('Link to this video has been copied to clipboard.');
+            } catch (err) {
+                console.error('Failed to copy link: ', err);
+            }
+
+            // Usunięcie tymczasowego pola tekstowego
+            document.body.removeChild(tempInput);
+        });
+    });
+    </script>
         <div class="comments-section">
             {% if user.is_authenticated %}
                 <form id="comment-form" action="{% url 'add_comment' video.url_path %}" method="post">
