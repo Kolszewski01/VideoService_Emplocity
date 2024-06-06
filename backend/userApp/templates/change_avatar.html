@@ -2,22 +2,36 @@
 {% load static %}
 
 
-{% block content %}
-  <h2>Zmiana awatara</h2>
 
-  <form method="post" enctype="multipart/form-data">
+{% block content %}
+<div class="avatar-content">
+<style>
+    input[type="checkbox"] {
+    visibility: hidden;
+}
+</style>
+    <div class="container-avatar" >
+  <form method="post" enctype="multipart/form-data" class="avatar-form">
+
+  <h2>Zmiana awatara</h2>
       {% csrf_token %}
       {{ form.as_p }}
       <button type="submit" name="upload_avatar">Zmień awatar</button>
   </form>
+</div>
 
+<div class="avatar-sklep">
   <h2>Wybierz zakupiony awatar</h2>
 
   <form id="select-avatar-form" method="post">
       {% csrf_token %}
       <div id="avatar-selection">
           {% for user_frame in user_frames %}
+              <div id="avatar-item">
+
+
               <img src="{{ user_frame.frame.frame_url.url }}" alt="{{ user_frame.frame.frame_name }}" data-frame-id="{{ user_frame.frame.id }}" class="selectable-avatar" width="100">
+          </div>
           {% endfor %}
       </div>
       <input type="hidden" name="frame_id" id="selected-frame-id">
@@ -30,8 +44,15 @@
           cursor: pointer;
       }
       .selected-avatar {
-          border: 2px solid blue;
+          border: 2px solid #E63453;
       }
+
+
+      #avatar-selection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
   </style>
 
   <script>
@@ -48,4 +69,7 @@
           });
       });
   </script>
+</div>
+</div>
 {% endblock %}
+

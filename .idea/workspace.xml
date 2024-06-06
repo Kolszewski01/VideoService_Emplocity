@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="86386dd5-433f-4b21-baf8-b9da63a47a99" name="Changes" comment="Poprawienie błędu wyświetlania się listy rozwijanej wyrzucenie styli changeavatar.css usunięcie styli podstrony chacnge avatar przez konflikty z innymi podstronami">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/static/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/static/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frameApp/templates/buy_frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/frameApp/templates/buy_frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/static/change-avatar.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/static/change-avatar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/userApp/templates/change_avatar.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/userApp/templates/change_avatar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,6 +139,13 @@
                     <value>
                       <list>
                         <option value="fe]11]Widok-resetowania-hasla" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="text">
+                    <value>
+                      <list>
+                        <option value="zmia" />
                       </list>
                     </value>
                   </entry>
