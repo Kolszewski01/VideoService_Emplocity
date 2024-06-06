@@ -29,7 +29,7 @@
 }
 /* Styl dla formularza podkomentarzy */
 .reply-form {
-    margin-top: 10px; /* Dodaj odstęp na górze formularza */
+    margin-top: 10px;
 }
 
 .reply-form form {
@@ -61,7 +61,7 @@
 }
 
 .reply-form button:hover {
-    background-color: #4192b4; /* Zmiana koloru tła przycisku podczas najechania */
+    background-color: #4192b4;
 }
 
 .like-comment-button,
@@ -70,8 +70,8 @@
     border: none;
     padding: 0;
     cursor: pointer;
-    color: #fdfdfd; /* Domyślnie biały kolor tekstu */
-    transition: color 0.3s ease; /* Płynna zmiana koloru */
+    color: #fdfdfd;
+    transition: color 0.3s ease;
 }
 .like-comment-button[data-like="true"] {
     color: #55BAE7;
@@ -164,21 +164,23 @@
 
 }
 
-.author-info{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-
+.author-info {
+    clear: both;
+    font-size: 20px;
+    font-weight: bold;
+    align-items: center;
 }
-
 .author-info img {
     border-radius: 50%;
-    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+    padding: 5px;
     display: inline-block;
     vertical-align: middle;
 }
 
 .author-info p {
+    margin-top: 25px;
     display: inline-block;
     vertical-align: middle;
 }

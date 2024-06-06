@@ -5,9 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86386dd5-433f-4b21-baf8-b9da63a47a99" name="Changes" comment="Poprawienie błędu wyświetlania się listy rozwijanej wyrzucenie styli changeavatar.css usunięcie styli podstrony chacnge avatar przez konflikty z innymi podstronami">
+      <change afterPath="$PROJECT_DIR$/backend/static/footer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/static/pagination.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/video/templates/footer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/frameApp/templates/buy_frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/frameApp/templates/buy_frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/static/sklep.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/static/sklep.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/like_dislikeApp/templates/liked_videos.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/like_dislikeApp/templates/liked_videos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/static/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/static/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/static/video-detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/static/video-detail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/video/templates/all_videos.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/video/templates/all_videos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/video/templates/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/video/templates/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/video/templates/pagination.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/video/templates/pagination.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/video/templates/search_video.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/video/templates/search_video.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/video/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/video/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +28,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="CSS File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -43,7 +54,7 @@
     &quot;Python.settings.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Dev]-1]-Hosting-aplikacji&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Hp/Documents/GitHub/emplocity/VideoService_Emplocity&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -56,17 +67,17 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\oleks\Desktop\Studia\VideoService_Emplocity\backend\video\templates" />
+      <recent name="C:\Users\oleks\Desktop\Studia\VideoService_Emplocity\backend\templates" />
+      <recent name="C:\Users\oleks\Desktop\Studia\VideoService_Emplocity\backend\backend" />
       <recent name="C:\Users\Hp\Documents\GitHub\emplocity\VideoService_Emplocity\backend\backend" />
       <recent name="C:\Users\Hp\Documents\GitHub\emplocity\VideoService_Emplocity\backend" />
-      <recent name="C:\Users\Hp\Documents\GitHub\emplocity\VideoService_Emplocity" />
-      <recent name="C:\projekt\VideoService_Emplocity" />
-      <recent name="C:\projekt\VideoService_Emplocity\backend" />
     </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-50da183f06c8-2887949eec09-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.13135.95" />
+        <option value="bundled-python-sdk-d68999036c7f-b11f5e8da5ad-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.14475.56" />
       </set>
     </attachedChunks>
   </component>
@@ -90,6 +101,11 @@
       <workItem from="1716032072975" duration="1004000" />
       <workItem from="1716136055074" duration="17000" />
       <workItem from="1716136083544" duration="7360000" />
+      <workItem from="1716292802682" duration="5173000" />
+      <workItem from="1716842191235" duration="2084000" />
+      <workItem from="1716848086197" duration="3111000" />
+      <workItem from="1716890092588" duration="8199000" />
+      <workItem from="1717609558825" duration="5521000" />
     </task>
     <task id="LOCAL-00001" summary="Poprawienie błędu wyświetlania się listy rozwijanej wyrzucenie styli changeavatar.css usunięcie styli podstrony chacnge avatar przez konflikty z innymi podstronami">
       <option name="closed" value="true" />

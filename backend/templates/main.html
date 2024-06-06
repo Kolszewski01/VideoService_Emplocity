@@ -67,6 +67,8 @@
     {% endfor %}
 </div>
 {% include "pagination.html" with page=videos %}
+        {% endblock %}
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.like-button, .dislike-button').forEach(button => {
