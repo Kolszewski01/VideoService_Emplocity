@@ -35,7 +35,6 @@
     color: #e53453;
 }
 
-/* Media Queries dla responsywności */
 @media (max-width: 768px) {
     .footer-container {
         flex-direction: column;
