@@ -36,7 +36,7 @@ def all_videos(request):
     else:
         video_list = Video.objects.filter(type=Video.Type.PUBLIC).order_by('-uploaded_at')
 
-    paginator = Paginator(video_list, 10)
+    paginator = Paginator(video_list, 2)
     page_number = request.GET.get('page', 1)
     try:
         videos = paginator.page(page_number)

@@ -1,7 +1,11 @@
 body {
     background-color: #9A9999;
     color: #FFFFFF;
+    max-width: 100%;
+    margin: 0 auto;
+    /*min-width: 800px;*/
 }
+
 .user-icon {
     width: 100px;
     height: 100px;
@@ -15,6 +19,7 @@ body {
     margin: 10px;
 }
 .logo-container img{
+    height: auto;
     width: 50%;
     height: 20%;
     padding: 5%;
@@ -31,9 +36,12 @@ body {
     align-items: center;
     flex-direction: row;
 }
-.logo-container{
-    width: 20%;
+.logo-container {
+    flex: 1;
+    min-width: 250px;
+    max-width: 250px;
 }
+
 
 .login{
     width: 20%;
@@ -43,7 +51,9 @@ body {
 }
 
 .search-container{
-    width: 40%;
+    flex: 2;
+    min-width: 300px;
+    /*width: 50%;*/
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,7 +61,7 @@ body {
 }
 #search {
     height: 34px;
-    width: 50%;
+    width: 100%;
     border: none;
     border-radius: 25px;
     outline: none;
@@ -63,6 +73,10 @@ body {
 input[type="search"]:focus {
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+.form-control{
+    width: 22rem;
+    border-radius: 2rem;
 }
 .search-button {
     width: 32px;
@@ -82,9 +96,9 @@ input[type="search"]:focus {
 .search-button:focus {
     background-color: #e53453;
 }
-.login-button {
-    display: inherit;
-    padding: 5px 12px 5px 5px;
+.login-button, .logout {
+    display: inline-block;
+    padding: 5px 12px;
     background-color: #55b9e6;
     color: #fff;
     font-size: 16px;
@@ -93,7 +107,7 @@ input[type="search"]:focus {
     transition: background-color 0.3s ease;
 }
 
-.login-button:hover {
+.login-button:hover, .logout:hover {
     background-color: #e53453;
     text-decoration: none;
     color: #fdfdfd;
@@ -109,7 +123,24 @@ input[type="search"]:focus {
     cursor: pointer;
     margin-right: 15px;
 }
+@media (max-width: 768px) {
+    .nav-bar {
+        flex-wrap: nowrap;
+    }
 
+    .logo-container, .search-container, .login {
+        flex: 1 1 auto;
+    }
+
+    .form-control {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .search-button {
+        margin-left: 5px;
+    }
+}
 .container{
     display: flex;
     justify-content: center;
@@ -204,8 +235,8 @@ input[type="search"]:focus {
     padding: 10px;
     margin-top: 10px;
     background-color: #6b6969;
-    border-radius: 5px;
-    box-shadow: 3px 3px 4px 2px #34728d;
+    border-radius: 5px 5px 0px 0px;
+    /*box-shadow: 3px 3px 4px 2px #34728d;*/
 }
 .logout {
     display: inherit;
@@ -224,17 +255,18 @@ input[type="search"]:focus {
     color: #fdfdfd;
 }
 .avatar_user_videos {
-    height: 50px;
+    height: 5em;
+    width: 5em;
     border-radius: 50%;
-    margin-right: 10px;
+    margin-right: 0.4em;
 }
 
 .author {
     margin-left: .1em;
     margin-top: 20px;
-    font-size: 1.7em;
+    font-size: 2.4em;
     font-weight: bold;
-
+    text-shadow: 2px 1px 4px black;
 }
 
 .video-container {
@@ -245,6 +277,8 @@ input[type="search"]:focus {
     text-shadow: 2px 1px 4px black;
     text-decoration: none;
     color: #fdfdfd;
+    margin-left: -4.4em;
+    background-color: #807e7b;
 }
 .title-video:hover{
     text-decoration: none;

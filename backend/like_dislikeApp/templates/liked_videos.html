@@ -7,7 +7,7 @@
         {% for like in liked_videos %}
             <div class="user-info-liked-videos"  >
                 <img class="avatr-user-liked-videos" style="background-image: url('{{ user.avatar.url }}')">
-                <p class="author-liked-videos">{{ video.author.username }} sdfsdfsdf</p>
+                <p class="author-liked-videos">{{ video.author.username }}</p>
             </div>
             <a href="{{ like.video.get_absolute_url }}">
                 <img class="liked-videos" src="{{ like.video.thumbnail.url }}">

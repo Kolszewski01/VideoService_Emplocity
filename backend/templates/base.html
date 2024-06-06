@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1600, initial-scale=1.0">
     <title>{% block title %}Strona główna{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'main.css'%}">
@@ -12,8 +12,8 @@
     <link rel="stylesheet" href={% static 'liked_videos.css'%}>
     <link rel="stylesheet" href={% static 'my_videos.css'%}>
     <link rel="stylesheet" href={% static 'sklep.css'%}>
-    <link rel="stylesheet" href={% static 'reset-hasla.css'%}>
-    <link rel="stylesheet" href={% static 'send-link.css'%}>
+    <link rel="stylesheet" href={% static 'pagination.css'%}>
+    <link rel="stylesheet" href={% static 'footer.css'%}>
 <style>
     .dropdown-list {
         position: absolute;
@@ -52,9 +52,8 @@
     {% if user.is_authenticated %}
         <div class="avatar-container" onclick="toggleDropdown()">
             <button class="btt account-button" style="background-image: url('{{ user.avatar.url }}')"></button>
-            <div id="dropdownList" class="dropdown-list" style="display: none;">
+            <div id="dropdownList" class="dropdown-list">
                 <a href="{% url 'upload_video' %}">Wrzuć film</a>
-                <a href="{% url 'gif_list' %}">Kup awatar</a>
                 <a href="{% url 'change_avatar' %}">Zmień avatar</a>
                 <a href="{% url 'my_videos' %}">Moje filmy</a>
                 <a href="{% url 'liked_videos' %}">Polubione filmy</a>
@@ -76,8 +75,8 @@
 
 <h2>Popularne teraz</h2>
 <div class="d-flex flex-wrap">
-    <div class="user-icon">User837</div>
-    <div class="user-icon">MAriusz1</div>
+{#    <div class="user-icon">User837</div>#}
+{#    <div class="user-icon">MAriusz1</div>#}
     {% for video in videos %}
         <img src="{{ video.thumbnail }}">
     {% endfor %}
@@ -89,17 +88,14 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy4Ck4SOF4y4Ck4C2DgHfViXydVeLm+JDM" crossorigin="anonymous"></script>
 <script>
     function toggleDropdown() {
-        const dropdownList = document.getElementById('dropdownList');
-        dropdownList.classList.toggle('active');
-    }
-        document.addEventListener("DOMContentLoaded", function() {
-        var dropdownList = document.getElementById("dropdownList");
-        dropdownList.style.display = "block";
-    });
-    function toggleDropdown() {
         var dropdownList = document.getElementById("dropdownList");
         dropdownList.style.display = dropdownList.style.display === "block" ? "none" : "block";
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var dropdownList = document.getElementById("dropdownList");
+        dropdownList.style.display = "none";
+    });
 </script>
 </body>
 </html>

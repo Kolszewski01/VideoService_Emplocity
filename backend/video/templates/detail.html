@@ -195,18 +195,18 @@ function showReplyForm(commentId) {
         </div>
    </div>
    <div class="sidebar">
-        <h2>Podobne Filmy</h2>
         {% for sidebar_video in sidebar_videos %}
             <div class="similar-video">
+                <div class="author-info">
+                    <img src="{{ sidebar_video.author.avatar.url }}" width="50px">
+                        <p>{{ sidebar_video.author.username }}</p>
+                </div>
                 <a href="{{ sidebar_video.get_absolute_url }}"><img src="{{ sidebar_video.thumbnail.url }}" width="100%"></a>
                 <div class="similar-video-info">
                     <div>
                         <p>{{ sidebar_video.title }}</p>
                     </div>
-                    <div class="author-info">
-                        <img src="{{ sidebar_video.author.avatar.url }}" width="50px">
-                        <p>{{ sidebar_video.author.username }}</p>
-                    </div>
+
                 </div>
             </div>
         {% endfor %}
